@@ -7,14 +7,14 @@ const pool = mysql.createPool({
     //port: process.env.DB_PORT,
     port: 3306,
     user: 'root',
-    password: 'DespoinaTomkou2903!!',
-    database:'ourdatabase'
+    password: 'MaryKoilalou2210!!',
+    database:'database'
     //user: process.env.DB_USER,
    // password: process.env.DB_PASS,
     //database: process.env.DB,
 })
 
-pool.query("select * from ourdatabase.Field", (err,res)=>{
+pool.query("select * from database.Field", (err,res)=>{
     return console.log(res)
 })
 

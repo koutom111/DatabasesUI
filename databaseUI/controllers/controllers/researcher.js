@@ -1,7 +1,10 @@
+//fix student to project queries etc
+
+
 const { pool } = require('../../utils/database');
 
-/* Controller to render data shown in landing page */
-exports.getLanding = (req, res, next) => {
+/* Controller to render data shown in researchers page */
+exports.getResearcher = (req, res, next) => {
 
     /* check for messages in order to show them when rendering the page */
     let messages = req.flash("messages");
@@ -40,8 +43,8 @@ exports.getLanding = (req, res, next) => {
 
         /* when queries promises finish render respective data */
         Promise.all([dribblingPromise, shootingPromise]).then(() => {
-            res.render('landing.ejs', {
-                pageTitle: "Landing Page",
+            res.render('researcher.ejs', {
+                pageTitle: "Researcher Page",
                 best_dribbling_grade,
                 best_dribbler,
                 best_shooter,
@@ -54,8 +57,8 @@ exports.getLanding = (req, res, next) => {
 }
 
 /* Controller to render data shown in create student page */
-exports.getCreateStudent = (req, res, next) => {
-    res.render('create_student.ejs', {
-        pageTitle: "Student Creation Page"
+exports.getCreateProject = (req, res, next) => {
+    res.render('create_project.ejs', {
+        pageTitle: "Project Creation Page"
     })
 }

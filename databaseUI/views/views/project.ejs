@@ -19,7 +19,7 @@
           <!-- Modal content-->
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Edit Student</h4>
+              <h4 class="modal-title">Edit Project</h4>
             </div>
             <div class="modal-body">
                 <form id="modal-form">
@@ -47,8 +47,8 @@
             <div class="col-md-12">
                 <div class="card" id="card-container">
                     <div class="card-body" id="card">
-                    <% if (students.length === 0) { %>
-                        <h1 style="margin-top: 5rem;">No Students found!</h1>
+                    <% if (project.length === 0) { %>
+                        <h1 style="margin-top: 5rem;">No Project found!</h1>
                     <% } else { %>
                         <div class="table-responsive">
                             <table class="table">
@@ -62,17 +62,17 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <% students.forEach((student, _) => { %>
+                                    <% project.forEach((project, _) => { %>
                                         <tr>
-                                            <td><%= student.id %></td>
-                                            <td><%= student.name %></td>
-                                            <td><%= student.surname %></td>
-                                            <td><%= student.email %></td>
+                                            <td><%= project.id %></td>
+                                            <td><%= project.name %></td>
+                                            <td><%= project.surname %></td>
+                                            <td><%= project.email %></td>
                                             <td>
                                                 <a type="button" onclick="setModalFields(this)"
-                                                    data-toggle="modal" data-id="<%= student.id %>" 
-                                                    data-name="<%= student.name %>" data-surname="<%= student.surname %>"
-                                                    data-email="<%= student.email %>" 
+                                                    data-toggle="modal" data-id="<%= project.id %>" 
+                                                    data-name="<%= project.name %>" data-surname="<%= project.surname %>"
+                                                    data-email="<%= project.email %>" 
                                                     data-target="#editModal">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
@@ -96,7 +96,7 @@
             document.getElementById("surname").value = row.dataset.surname;
             document.getElementById("email").value = row.dataset.email;
 
-            document.getElementById("modal-form").action = "/students/update/" + row.dataset.id;
+            document.getElementById("modal-form").action = "/project/update/" + row.dataset.id;
             document.getElementById("modal-form").method = "POST";
         }
     </script>
