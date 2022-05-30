@@ -2,12 +2,13 @@ const express = require('express');
 const path = require('path');
 const session = require('express-session');
 const flash = require('connect-flash');
+const router = express.Router();
 
 require('custom-env').env('localhost');
 
 /* ROUTES and how to import routes */
 
-// const layout = require('./routes/layout');
+ const person = require('./routes/routes/person');
 // const grades = require('./routes/grades');
 // const students = require('./routes/students');
 
@@ -32,7 +33,9 @@ app.use(session({
 
 /* Routes used by the project */
 
-// app.use('/', layout);
+ app.use('/', person);
+
+
 // app.use('/grades', grades);
 // app.use('/students', students);
 

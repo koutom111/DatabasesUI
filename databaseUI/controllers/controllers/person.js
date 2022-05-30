@@ -27,7 +27,7 @@ exports.getPerson = (req, res, next) => {
 
         /* when queries promises finish render respective data */
         Promise.all([namePromise]).then(() => {
-            res.render('person.ejs', {
+            res.render('views/person.ejs', {
                 pageTitle: "Person Page",
                 personName,
                 messages
