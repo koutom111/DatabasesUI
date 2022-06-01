@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+    <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title> <%= pageTitle %> </title>
+<title> <%= pageTitle %> </title>
 
 </head>
 
@@ -25,33 +25,33 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th>Program Title</th>
-                                <th>Description</th>
+                                <th>Project Title</th>
+                                <th>Summary</th>
                                 <th></th>
                             </tr>
                             </thead>
-                            <% if(ProgramTitle.length){
+                            <% if(ProjectTitle.length){
 
-                            for(var i = 0; i< ProgramTitle.length; i++) {%>
-                                <tr>
-                                    <th scope="row"><%= (i+1) %></th>
-                                    <td><%= ProgramTitle[i]%></td>
-                                    <td><%= Description[i]%></td>
-                                </tr>
+                            for(var i = 0; i< ProjectTitle.length; i++) {%>
+                            <tr>
+                            <th scope="row"><%= (i+1) %></th>
+                            <td><%=ProjectTitle[i]%></td>
+                            <td><%= Summary[i]%></td>
+                            </tr>
                             <% }
 
-                            }else{ %>
-                                <tr>
-                                    <td colspan="3">No Program</td>
-                                </tr>
+                        }else{ %>
+                            <tr>
+                            <td colspan="3">No Project</td>
+                            </tr>
                             <% } %>
-                            </tbody>
-                        </table>
-                    </div>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 
 

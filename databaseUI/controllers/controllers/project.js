@@ -1,14 +1,14 @@
 const { pool } = require('../../utils/database');
 
 /* Controller to render data shown in landing page */
-exports.getProgram = (req, res, next) => {
+exports.getProject = (req, res, next) => {
 
     /* check for messages in order to show them when rendering the page */
     let messages = req.flash("messages");
     if (messages.length === 0) messages = [];
 
-    let ProgramTitle= [];
-    let Description = [];
+    let ProjectTitle= [];
+    let Summary = [];
 
     /* create the connection */
     pool.getConnection((err, conn) => {
@@ -16,14 +16,14 @@ exports.getProgram = (req, res, next) => {
         /* execute query to get best dribbler */
         let namePromise = new Promise((resolve, reject) => {
             conn.promise()
-                .query("select Program_Title, Description from Program")
+                .query("select Project_Title, Summary from Project")
                 .then(([rows, fields]) => {      //??????
                     rows.forEach(element=>{
-                        ProgramTitle.push(element.Program_Title);
-                        Description.push(element.Description);
+                        ProjectTitle.push(element.Project_Title);
+                        Summary.push(element.Summary);
                     })
-                    console.log(ProgramTitle);
-                    console.log(Description);
+                    console.log(ProjectTitle);
+                    console.log(Summary);
                     resolve();
                 })
                 .then(() => pool.releaseConnection(conn))
@@ -33,10 +33,10 @@ exports.getProgram = (req, res, next) => {
 
         /* when queries promises finish render respective data */
         Promise.all([namePromise]).then(() => {
-            res.render('views/program.ejs', {
-                pageTitle: "See All our Programs! ",
-                ProgramTitle ,
-                Description,
+            res.render('views/project.ejs', {
+                pageTitle: "See All our Projects! ",
+                ProjectTitle ,
+                Summary,
                 messages
             })
         });
