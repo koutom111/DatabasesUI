@@ -11,6 +11,7 @@ require('custom-env').env('localhost');
  const program = require('./routes/routes/program');
 const project = require('./routes/routes/project');
 const home = require('./routes/routes/home');
+const interField = require('./routes/routes/interField');
 // const grades = require('./routes/grades');
 // const students = require('./routes/students');
 
@@ -37,7 +38,7 @@ app.use(session({
 
  app.use('/', home);
 
-
+app.use('/interField', interField);
  app.use('/program', program);
  app.use('/project', project);
 
