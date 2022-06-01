@@ -8,7 +8,7 @@ require('custom-env').env('localhost');
 
 /* ROUTES and how to import routes */
 
- const person = require('./routes/routes/person');
+ const program = require('./routes/routes/program');
 // const grades = require('./routes/grades');
 // const students = require('./routes/students');
 
@@ -33,7 +33,7 @@ app.use(session({
 
 /* Routes used by the project */
 
- app.use('/', person);
+ app.use('/', program);
 
 
 // app.use('/grades', grades);

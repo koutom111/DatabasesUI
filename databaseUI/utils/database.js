@@ -8,13 +8,13 @@ const pool = mysql.createPool({
     port: 3306,
     user: 'root',
     password: 'DespoinaTomkou2903!!',
-    database:'mydatabase'
+    database:'database'
     //user: process.env.DB_USER,
    // password: process.env.DB_PASS,
     //database: process.env.DB,
 })
 
-pool.query("select * from Person", (err,res)=>{
+pool.query("select * from Program", (err,res)=>{
 return console.log(res)
 })
 

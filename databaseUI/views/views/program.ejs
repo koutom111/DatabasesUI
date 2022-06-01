@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title> <%= pageTitle %> </title>
+
+</head>
+
+<body>
+
+<h2>Welcome Person</h2>
+
+
+
+<div class="container">
+    <div class="row" id="row">
+        <div class="col-md-12">
+            <div class="card" id="card-container">
+                <div class="card-body" id="card">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Project Title</th>
+                                <th>Description</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <% if(ProgramTitle.length){
+
+                            for(var i = 0; i< ProgramTitle.length; i++) {%>
+                                <tr>
+                                    <th scope="row"><%= (i+1) %></th>
+                                    <td><%= ProgramTitle[i]%></td>
+                                    <td><%= Description[i]%></td>
+                                </tr>
+                            <% }
+
+                            }else{ %>
+                                <tr>
+                                    <td colspan="3">No Program</td>
+                                </tr>
+                            <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="../../public/assets/bootstrap/js/bootstrap.min.js"></script>
+
+<script src="../../public/assets/js/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+<script>
+
+</script>
+
+
+</body>
+
+</html>
