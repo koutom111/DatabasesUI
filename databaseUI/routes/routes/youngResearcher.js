@@ -1,9 +1,9 @@
 const express = require('express');
-const youngReasercherController = require('../../controllers/controllers/youngReasercher');
+const youngResearcherController = require('../../controllers/controllers/youngResearcher');
 
 const router = express.Router();
 
-router.get('/', youngReasercherController.getYoungReasercher);
+router.get('/', youngResearcherController.getYoungResearcher);
 //router.get('/student-creation-page', layoutController.getCreateStudent)
 
 module.exports = router;
