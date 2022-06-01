@@ -13,6 +13,9 @@ const project = require('./routes/routes/project');
 const home = require('./routes/routes/home');
 const interField = require('./routes/routes/interField');
 const youngResearcher = require('./routes/routes/youngResearcher');
+const bestExecutives = require('./routes/routes/bestExecutives');
+const noStress = require('./routes/routes/noStress');
+
 // const grades = require('./routes/grades');
 // const students = require('./routes/students');
 
@@ -43,6 +46,10 @@ app.use('/interField', interField);
  app.use('/program', program);
  app.use('/project', project);
 app.use('/youngResearcher', youngResearcher);
+
+app.use('/bestExecutives', bestExecutives);
+app.use('/noStress', noStress);
+
 
 /* End of routes used by the project */
 

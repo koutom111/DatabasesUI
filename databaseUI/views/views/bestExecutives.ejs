@@ -25,7 +25,8 @@
                             <tr>
                                 <th> First Name</th>
                                 <th> Last Name</th>
-                                <th> Number of Projects</th>
+                                <th> Organization_Name</th>
+                                <th> Sum </th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -36,13 +37,14 @@
                                 <tr>
                                     <td><%= First_Name[i] %></td>
                                     <td><%= Last_Name[i] %></td>
-                                    <td><%= Project_Cnt[i] %></td>
+                                    <td><%= Organization_Name[i] %></td>
+                                    <td><%= Sum[i] %></td>
                                 </tr>
                             <% }
 
                             }else{ %>
                                 <tr>
-                                    <td colspan="3">No Top Researchers</td>
+                                    <td colspan="3">No Top Executives</td>
                                 </tr>
                             <% } %>
                             </tbody>

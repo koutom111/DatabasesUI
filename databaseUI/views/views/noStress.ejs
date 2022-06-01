@@ -13,6 +13,8 @@
 
 <h2> <%= pageTitle %> </h2>
 
+<p> These researchers work in 5 or more projects that don't have deliverables</p>
+
 
 <div class="container">
     <div class="row" id="row">
@@ -36,13 +38,13 @@
                                 <tr>
                                     <td><%= First_Name[i] %></td>
                                     <td><%= Last_Name[i] %></td>
-                                    <td><%= Project_Cnt[i] %></td>
+                                    <td><%= Count[i] %></td>
                                 </tr>
                             <% }
 
                             }else{ %>
                                 <tr>
-                                    <td colspan="3">No Top Researchers</td>
+                                    <td colspan="3">All executives have stress:( </td>
                                 </tr>
                             <% } %>
                             </tbody>
