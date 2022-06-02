@@ -16,6 +16,9 @@ const youngResearcher = require('./routes/routes/youngResearcher');
 const bestExecutives = require('./routes/routes/bestExecutives');
 const noStress = require('./routes/routes/noStress');
 const organization = require('./routes/routes/organization');
+const projectResearcher= require('./routes/routes/projectResearcher');
+const projectEvaluation= require('./routes/routes/projectEvaluation');
+
 
 
 
@@ -51,6 +54,8 @@ app.use('/interField', interField);
 app.use('/youngResearcher', youngResearcher);
 app.use('/bestExecutives', bestExecutives);
 app.use('/noStress', noStress);
+app.use('/projectResearcher', projectResearcher);
+app.use('/projectEvaluation', projectEvaluation);
 
 // app.use('/editProject', project);
 // app.use ('editProgram', program);
