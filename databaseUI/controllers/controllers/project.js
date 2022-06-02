@@ -44,4 +44,30 @@ exports.getProject = (req, res, next) => {
     })
 }
 
+exports.postProject = (req, res, next) => {
+
+    /* get necessary data sent */
+    const Project_Title = req.body.Project_Title;
+    const Summary = req.body.Summary;
+    const Grant = req.body.Grant;
+
+    /* create the connection, execute query, flash respective message and redirect to grades route */
+    pool.getConnection((err, conn) => {
+        var sqlQuery = `INSERT INTO Project(Project_Title, Summary, Grant) VALUES(?, ?, ?)`;
+
+        conn.promise().query(sqlQuery, [Project_Title, Summary, Grant])
+            .then(() => {
+                pool.releaseConnection(conn);
+                req.flash('messages', { type: 'success', value: "Successfully added a new Project!" });
+                console.log("success!");
+                res.redirect('/');
+            })
+            .catch(err => {
+                req.flash('messages', { type: 'error', value: "Something went wrong, Project could not be added." });
+                console.log("no");
+                res.redirect('/');
+            })
+    })
+}
+
 /* Controller to render data shown in create student page */
