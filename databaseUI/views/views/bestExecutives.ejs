@@ -55,24 +55,28 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th> First Scientific Field</th>
-                                <th> Second Scientific Field</th>
+                                <th> First Name</th>
+                                <th> Last Name</th>
+                                <th> Organization_Name</th>
+                                <th> Sum </th>
                                 <th></th>
                             </tr>
                             </thead>
                             <tbody>
-                            <% if(F1.length){
+                            <% if(Last_Name.length){
 
-                            for(var i = 0; i < F1.length; i++) { %>
+                            for(var i = 0; i < Last_Name.length; i++) { %>
                                 <tr>
-                                    <td><%= F1[i] %></td>
-                                    <td><%= F2[i] %></td>
+                                    <td><%= First_Name[i] %></td>
+                                    <td><%= Last_Name[i] %></td>
+                                    <td><%= Organization_Name[i] %></td>
+                                    <td><%= Sum[i] %></td>
                                 </tr>
                             <% }
 
                             }else{ %>
                                 <tr>
-                                    <td colspan="3">No Top Fields</td>
+                                    <td colspan="3">No Top Executives</td>
                                 </tr>
                             <% } %>
                             </tbody>

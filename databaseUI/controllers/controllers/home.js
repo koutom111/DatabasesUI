@@ -6,4 +6,10 @@ exports.getHome = (req, res, next) => {
 
 }
 
+exports.getEditProject = (req, res, next) => {
+    res.render('views/editProject.ejs', {
+        pageTitle: "Edit Project Page"
+    })
+}
+
 /* Controller to render data shown in create student page */

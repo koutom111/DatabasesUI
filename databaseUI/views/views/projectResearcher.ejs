@@ -15,8 +15,6 @@
         button  {text-align: center;}
         span  {text-align: center;}
         th  {text-align: center;}
-
-
     </style>
 
     <meta charset="utf-8">
@@ -41,9 +39,10 @@
 
 <body>
 
-<h3><%- include("includes/navbar.ejs") %></h3>
+<h3><%- include("includes/navbar.ejs")%></h3>
 
 <h2> <%= pageTitle %> </h2>
+
 
 
 <div class="container">
@@ -55,24 +54,29 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th> First Scientific Field</th>
-                                <th> Second Scientific Field</th>
+                                <th>Project Title</th>
+                                <th>Researcher Name</th>
+                                <th>Scientific Manager Name</th>
+                                <th>Evaluator Name</th>
+
                                 <th></th>
                             </tr>
                             </thead>
-                            <tbody>
-                            <% if(F1.length){
+                            <% if(ProjectTitle.length){
 
-                            for(var i = 0; i < F1.length; i++) { %>
+                            for(var i = 0; i< ProjectTitle.length; i++) {%>
                                 <tr>
-                                    <td><%= F1[i] %></td>
-                                    <td><%= F2[i] %></td>
+                                    <!--                            <th scope="row"><%= (i+1) %></th>-->
+                                    <td><%=ProjectTitle[i]%></td>
+                                    <td><%= ResearcherName[i]%></td>
+                                    <td><%= ScientificManagerName[i]%></td>
+                                    <td><%= EvaluatorName[i]%></td>
                                 </tr>
                             <% }
 
                             }else{ %>
                                 <tr>
-                                    <td colspan="3">No Top Fields</td>
+                                    <td colspan="3">No Project</td>
                                 </tr>
                             <% } %>
                             </tbody>
@@ -83,3 +87,18 @@
         </div>
     </div>
 </div>
+
+
+<script src="../../public/assets/bootstrap/js/bootstrap.min.js"></script>
+
+<script src="../../public/assets/js/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+<script>
+
+</script>
+
+
+</body>
+
+</html>

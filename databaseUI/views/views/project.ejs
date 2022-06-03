@@ -1,7 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
+<head>
+        <style>
+            h1 {text-align: center;}
+            h3 {text-align: center;}
+            h2 {text-align: center;}
+            p {text-align: center;}
+            div {text-align: center;}
+            title {text-align: center;}
+            ul {text-align: center;}
+            li  {text-align: center;}
+            a  {text-align: center;}
+            button  {text-align: center;}
+            span  {text-align: center;}
+            th  {text-align: center;}
+
+
+        </style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <title> <%= pageTitle %> </title>
@@ -46,12 +62,27 @@
         color: white;
     }
 </style>
+    <title> <%= pageTitle %> </title>
+
+        <meta name="viewport" content=
+        "width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href=
+        "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+        <script src=
+                "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+        </script>
+
+        <script src=
+                "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js">
+        </script>
 
 </head>
 
 <body>
 
-<%- include("includes/navbar.ejs")%>
+<h3><%- include("includes/navbar.ejs")%></h3>
 
 <h2> <%= pageTitle %> </h2>
 
