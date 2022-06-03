@@ -58,9 +58,9 @@
 <!-- Control buttons -->
 <div id="myBtnContainer">
     <button class="btn active" onclick="filterSelection('all')"> Show all</button>
-    <button class="btn" onclick="filterSelection('cars')"> Date</button>
-    <button class="btn" onclick="filterSelection('animals')"> Duration</button>
-    <button class="btn" onclick="filterSelection('fruits')"> Executive</button>
+    <button class="btn" onclick="filterSelection('date')"> Date</button>
+    <button class="btn" onclick="filterSelection('duration')"> Duration</button>
+    <button class="btn" onclick="filterSelection('executive')"> Executive</button>
 </div>
 
 <!-- The filterable elements. Note that some have multiple class names (this can be used if they belong to multiple categories) -->
@@ -91,8 +91,11 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th>Project Title</th>
+                                <th class="filterDiv projecttitle">Project Title</th>
                                 <th>Summary</th>
+                                <th class="filterDiv date">Date</th>
+                                <th class="filterDiv duration">Duration</th>
+                                <th class="filterDiv executive">Executive</th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -103,6 +106,10 @@
 <!--                            <th scope="row"><%= (i+1) %></th>-->
                             <td><%=ProjectTitle[i]%></td>
                             <td><%= Summary[i]%></td>
+                            <td><%= Date[i]%></td>
+                            <td><%= Duration[i]%></td>
+                            <td><%= Executive[i]%></td>
+
                             </tr>
                             <% }
 
