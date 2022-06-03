@@ -1,9 +1,9 @@
 const express = require('express');
-const layoutController = require('../controllers/layout');
+const researcherController = require('../../controllers/controllers/researcher');
 
 const router = express.Router();
 
-router.get('/', layoutController.getLanding);
-router.get('/student-creation-page', layoutController.getCreateStudent)
+router.get('/', researcherController.getLanding);
+router.get('/student-creation-page', researcherController.getCreateStudent)
 
 module.exports = router;
