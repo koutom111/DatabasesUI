@@ -20,6 +20,28 @@
         </style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<title> <%= pageTitle %> </title>
+<style>
+    .container {
+        overflow: hidden;
+    }
+    .filterDiv {
+        float: left;
+        /*background-color: #2196F3;
+        color: #ffffff;*/
+        width: 200px;
+        line-height: 100px;
+        text-align: center;
+        margin: 2px;
+        display: none; /* Hidden by default */
+    }
+
+    /* The "show" class is added to the filtered elements */
+    .show {
+        display: block;
+    }
+
+</style>
     <title> <%= pageTitle %> </title>
 
         <meta name="viewport" content=
@@ -44,8 +66,22 @@
 
 <h2> <%= pageTitle %> </h2>
 
+    <p>Choose your project based on:</p>
+<div class="box">
+    <label for="c1"><input type="checkbox" name="criteria" value="all" id="c1">Show all</label>
+    <label for="c2"><input type="checkbox" name="criteria" value="summary" id="c2">Summary</label>
+    <label for="c3"><input type="checkbox" name="criteria" value="date" id="c3">Date</label>
+    <label for="c4"><input type="checkbox" name="criteria" value="duration" id="c4">Duration</label>
+    <label for="c5"><input type="checkbox" name="criteria" value="executive" id="c5">Executive</label>
+</div>
+    <p>
+    <button id="btn">Get Project Information</button>
+</p>
 
+<!-- The filterable elements. Note that some have multiple class names (this can be used if they belong to multiple categories) -->
+<p>
 
+</p>
 <div class="container">
     <div class="row" id="row">
         <div class="col-md-12">
@@ -55,9 +91,11 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th>Project Title</th>
-                                <th>Summary</th>
-                                <th></th>
+                                <th style="text-align:center">Project Title</th>
+                                <th class="filterDiv summary">Summary</th>
+                                <th class="filterDiv date">Starting Date</th>
+                                <th class="filterDiv duration">Duration (Days)</th>
+                                <th class="filterDiv executive">Executive</th>
                             </tr>
                             </thead>
                             <% if(ProjectTitle.length){
@@ -66,7 +104,11 @@
                             <tr>
 <!--                            <th scope="row"><%= (i+1) %></th>-->
                             <td><%=ProjectTitle[i]%></td>
-                            <td><%= Summary[i]%></td>
+                            <td class="filterDiv summary"><%= Summary[i]%></td>
+                            <td class="filterDiv date"><%= Date[i]%></td>
+                            <td class="filterDiv duration"><%= Duration[i]%></td>
+                            <td class="filterDiv executive"><%= Executive[i]%></td>
+
                             </tr>
                             <% }
 
@@ -91,7 +133,64 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
 <script>
+    const btn = document.querySelector('#btn');
+    btn.addEventListener('click', (event) => {
+        var r, i;
+        r = document.getElementsByClassName("filterDiv");
+        for (i = 0; i < r.length; i++) {
+            w3RemoveClass(r[i], "show");
+        }
+        let checkboxes = document.querySelectorAll('input[name="criteria"]:checked');
+        checkboxes.forEach((checkbox) => {
+            filterSelection(checkbox.value);
+        });
+    });
+    filterSelection("all")
+    function filterSelection(c) {
+        var x, i;
+        x = document.getElementsByClassName("filterDiv");
+        if (c == "all") c = "";
+        // Add the "show" class (display:block) to the filtered elements, and remove the "show" class from the elements that are not selected
+        for (i = 0; i < x.length; i++) {
+            if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+        }
+    }
 
+    // Show filtered elements
+    function w3AddClass(element, name) {
+        var i, arr1, arr2;
+        arr1 = element.className.split(" ");
+        arr2 = name.split(" ");
+        for (i = 0; i < arr2.length; i++) {
+            if (arr1.indexOf(arr2[i]) == -1) {
+                element.className += " " + arr2[i];
+            }
+        }
+    }
+
+    // Hide elements that are not selected
+    function w3RemoveClass(element, name) {
+        var i, arr1, arr2;
+        arr1 = element.className.split(" ");
+        arr2 = name.split(" ");
+        for (i = 0; i < arr2.length; i++) {
+            while (arr1.indexOf(arr2[i]) > -1) {
+                arr1.splice(arr1.indexOf(arr2[i]), 1);
+            }
+        }
+        element.className = arr1.join(" ");
+    }
+
+    // Add active class to the current control button (highlight it)
+ /*   var btnContainer = document.getElementById("myBtnContainer");
+    var btns = btnContainer.getElementsByClassName("btn");
+    for (var i = 0; i < btns.length; i++) {
+        btns[i].addEventListener("click", function() {
+            var current = document.getElementsByClassName("active");
+            current[0].className = current[0].className.replace(" active", "");
+            this.className += " active";
+        });
+    } */
 </script>
 
 
