@@ -69,17 +69,17 @@ exports.postResearcher = (req, res, next) => {
     pool.getConnection((err, conn) => {
         var sqlQuery = `INSERT INTO Researcher(Researcher_ID, First_Name, Last_Name,Sex,Dateof_Birth) VALUES(?, ?, ?,?,?)`;
 
-        conn.promise().query(sqlQuery, [Researcher_ID, First_Name,Last_Name,Sex,Dateof_Birth])
+        conn.promise().query(sqlQuery, [Researcher_ID, First_Name,Last_Name,Dateof_Birth])
             .then(() => {
                 pool.releaseConnection(conn);
                 req.flash('messages', { type: 'success', value: "Successfully added a new Researcher!" });
                 console.log("success!");
-                res.redirect('/');
+                res.redirect('/editResearcher');
             })
             .catch(err => {
                 req.flash('messages', { type: 'error', value: "Something went wrong, Researcher could not be added." });
                 console.log("no");
-                res.redirect('/');
+                res.redirect('/editResearcher');
             })
     })
 }

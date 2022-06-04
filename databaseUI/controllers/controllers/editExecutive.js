@@ -70,7 +70,7 @@ exports.postExecutive = (req, res, next) => {
                         pool.releaseConnection(conn);
                         req.flash('messages', {type: 'success', value: "Successfully added a new Executive!"});
                         console.log("success!");
-                        res.redirect('/executive');
+                        res.redirect('/editExecutive');
                     })
                         .catch(err => {
                             req.flash('messages', {
@@ -78,7 +78,7 @@ exports.postExecutive = (req, res, next) => {
                                 value: "Something went wrong, Executive could not be added."
                             });
                             console.log("no");
-                            res.redirect('/executive');
+                           res.redirect('/editExecutive');
                         })
                 })
         })

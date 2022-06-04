@@ -87,7 +87,7 @@ exports.postDeleteProject = (req, res, next) => {
     const Project_Title = req.body.Project_Title;
     /* create the connection, execute query, flash respective message and redirect to organization route */
     pool.getConnection((err, conn) => {
-        var sqlQuery = `DELETE * FROM Project WHERE Project_Title = ${Program_Title}`;
+        var sqlQuery = `DELETE * FROM Project WHERE Project_Title = ${Project_Title}`;
 
         conn.promise().query(sqlQuery)
             .then(() => {
