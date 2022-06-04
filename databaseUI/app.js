@@ -21,7 +21,7 @@ const projectEvaluation= require('./routes/routes/projectEvaluation');
 const editExecutive = require('./routes/routes/editExecutive');
 const editResearcher = require('./routes/routes/editResearcher');
 const constOrganization = require('./routes/routes/constOrganization');
-
+const popularField = require('./routes/routes/popularField');
 
 // const grades = require('./routes/grades');
 // const students = require('./routes/students');
@@ -60,7 +60,8 @@ app.use('/projectEvaluation', projectEvaluation);
 app.use('/editExecutive',editExecutive);
 app.use('/editOrganization',editOrganization);
 app.use('/editResearcher',editResearcher);
-app.use('constOrganization',constOrganization);
+app.use('/constOrganization',constOrganization);
+app.use('/popularField',popularField);
 // app.use('/editProject', project);
 // app.use ('editProgram', program);
 // app.use ('/editOrganization', organization);
