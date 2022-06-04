@@ -41,10 +41,9 @@
 
 <body>
 
-<h3><%- include("includes/navbar.ejs")%></h3>
+<h3><%- include("includes/navbar.ejs") %></h3>
 
 <h2> <%= pageTitle %> </h2>
-
 
 
 <div class="container">
@@ -56,25 +55,24 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th style="text-align:center">Program Title</th>
-                                <th style="text-align:center">Description</th>
+                                <th> Organization Name</th>
+                                <th> Number of projects</th>
                                 <th></th>
                             </tr>
                             </thead>
                             <tbody>
-                            <% if(ProgramTitle.length){
+                            <% if(OrganizationName.length){
 
-                            for(var i = 0; i< ProgramTitle.length; i++) {%>
+                            for(var i = 0; i < OrganizationName.length; i++) { %>
                                 <tr>
-<!--                                    <th scope="row"><%= (i+1) %></th>-->
-                                    <td><%= ProgramTitle[i]%></td>
-                                    <td><%= Description[i]%></td>
+                                    <td><%= OrganizationName[i] %></td>
+                                    <td><%= NumberofProjects[i] %></td>
                                 </tr>
                             <% }
 
                             }else{ %>
                                 <tr>
-                                    <td colspan="3">No Program</td>
+                                    <td colspan="3">No Consistent Organizations</td>
                                 </tr>
                             <% } %>
                             </tbody>
@@ -85,18 +83,3 @@
         </div>
     </div>
 </div>
-
-
-<script src="../../public/assets/bootstrap/js/bootstrap.min.js"></script>
-
-<script src="../../public/assets/js/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-
-<script>
-
-</script>
-
-
-</body>
-
-</html>
