@@ -33,7 +33,7 @@ exports.getConstOrganization = (req, res, next) => {
 
         /* when queries promises finish render respective data */
         Promise.all([namePromise]).then(() => {
-            res.render('views/interField.ejs', {
+            res.render('views/constOrganization.ejs', {
                 pageTitle: "See the most consistent Organizations!",
                 OrganizationName,
                 NumberofProjects,

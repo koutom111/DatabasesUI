@@ -19,7 +19,7 @@ exports.getProject = (req, res, next) => {
         /* execute query to get best dribbler */
         let namePromise = new Promise((resolve, reject) => {
             conn.promise()
-                .query("select P.Project_Title AS Project_Title, P.Summary AS Summary, P.Starting_Date AS Starting_Date, P.Duration AS Duration,CONCAT(First_Name , ' ' , Last_Name) AS ExName from Project P inner join Executive E on P.Executive_ID=E.Executive_ID")
+                .query("select P.Project_Title AS Project_Title, P.Summary AS Summary, P.Starting_Date AS Starting_Date, P.Duration AS Duration,CONCAT(E.First_Name , ' ' ,E.Last_Name) AS ExName from Project P inner join Executive E on P.Executive_ID=E.Executive_ID WHERE P.Due_Date>curdate()")
                 .then(([rows, fields]) => {      //??????
                     rows.forEach(element=>{
                         ProjectTitle.push(element.Project_Title);
