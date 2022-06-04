@@ -18,7 +18,6 @@
 
 
     </style>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title> <%= pageTitle %> </title>
@@ -56,30 +55,34 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th>Program Title</th>
-                                <th>Description</th>
-                                <th>Department</th>
+                                <th>Organization_Title</th>
+                                <th>Abbrevation</th>
+                                <th>Street</th>
+                                <th>Town</th>
+                                <th>Number</th>
+                                <th>Postal_Code</th>
                                 <th></th>
                             </tr>
                             </thead>
-                            <tbody>
-                            <% if(Program_Title.length){
+                            <% if(Organization_Title.length){
 
-                            for(var i = 0; i< Program_Title.length; i++) {%>
+                            for(var i = 0; i< Organization_Title.length; i++) {%>
                                 <tr>
-<!--                                    <th scope="row"><%= (i+1) %></th>-->
-                                    <td><%= Program_Title[i]%></td>
-                                    <td><%= Description[i]%></td>
-                                    <td><%= Department[i]%></td>
+                                    <!--                            <th scope="row"><%= (i+1) %></th>-->
+                                    <th><%=Organization_Title[i]%></th>
+                                    <th><%=Abbrevation[i]%></th>
+                                    <th><%=Street[i]%></th>
+                                    <th><%=Town[i]%></th>
+                                    <th><%=Number[i]%></th>
+                                    <th><%=Postal_Code[i]%></th>
                                 </tr>
                             <% }
 
                             }else{ %>
                                 <tr>
-                                    <td colspan="3">No Program</td>
+                                    <td colspan="3">No Organization</td>
                                 </tr>
                             <% } %>
-                            </tbody>
                         </table>
                     </div>
                 </div>

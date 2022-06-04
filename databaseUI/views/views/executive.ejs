@@ -56,27 +56,29 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th>Program Title</th>
-                                <th>Description</th>
-                                <th>Department</th>
+                                <th>Executive ID</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Date of Birth</th>
                                 <th></th>
                             </tr>
                             </thead>
                             <tbody>
-                            <% if(Program_Title.length){
+                            <% if(Executive_ID.length){
 
-                            for(var i = 0; i< Program_Title.length; i++) {%>
+                            for(var i = 0; i< Executive_ID.length; i++) {%>
                                 <tr>
-<!--                                    <th scope="row"><%= (i+1) %></th>-->
-                                    <td><%= Program_Title[i]%></td>
-                                    <td><%= Description[i]%></td>
-                                    <td><%= Department[i]%></td>
+                                    <!--                                    <th scope="row"><%= (i+1) %></th>-->
+                                    <td><%= Executive_ID[i]%></td>
+                                    <td><%= First_Name[i]%></td>
+                                    <td><%= Last_Name[i]%></td>
+                                    <td><%= Dateof_Birth[i]%></td>
                                 </tr>
                             <% }
 
                             }else{ %>
                                 <tr>
-                                    <td colspan="3">No Program</td>
+                                    <td colspan="3">No Executive</td>
                                 </tr>
                             <% } %>
                             </tbody>
