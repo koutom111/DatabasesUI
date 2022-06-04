@@ -10,7 +10,7 @@ exports.getOrganization = (req, res, next) => {
 
         let namePromise = new Promise((resolve, reject) => {
             conn.promise()
-                .query("select Organization_Name,Abbrevation,Street,Town,Number,Postal_Code from Organization")
+                .query("select * from Organization")
                 .then(([rows, fields]) => {      //??????
                     organizations = rows;
                     // rows.forEach(element=>{

@@ -84,13 +84,14 @@ exports.postEditProgram = (req, res, _) => {
 
     pool.getConnection((err, conn) => {
 
-        let Description = req.body['description'];
-        let Department = req.body.department;
+        let programtitle = req.body.programtitle;
+        let description = req.body['description'];
+        let department = req.body.department;
 
         let editQuery = `UPDATE Program SET  Description=?, Department = ? WHERE Program_Title=?;`;
 
 
-        conn.promise().query(editQuery, [Description,Department])
+        conn.promise().query(editQuery, [description,department,programtitle])
             .then(() => {
                 pool.releaseConnection(conn);
                 res.redirect('/program');

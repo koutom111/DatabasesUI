@@ -10,7 +10,7 @@ exports.getResearcher = (req, res, next) => {
 
         let namePromise = new Promise((resolve, reject) => {
             conn.promise()
-                .query("select Researcher_ID,First_Name,Last_Name,Sex,Dateof_Birh from Researcher")
+                .query("select Researcher_ID,First_Name,Last_Name,Sex,Dateof_Birth from Researcher")
                 .then(([rows, fields]) => {      //??????
                     researchers = rows;
                     resolve();
@@ -87,14 +87,15 @@ exports.postEditResearcher = (req, res, _) => {
 
     pool.getConnection((err, conn) => {
 
-        let First_Name = req.body.firstname;
-        let Last_Name = req.body.lastname;
-        let Sex = req.body.sex;
-        let Dateof_Birth = req.body.dateofbirth;
+        let researcherid = req.body.researcherid;
+        let firstname = req.body.firstname;
+        let lastname = req.body.lastname;
+        let sex = req.body.sex;
+        let dateofbirth = req.body.dateofbirth;
 
         let editQuery = `UPDATE Researcher SET First_Name=?, Last_Name=?, Sex= ?, Dateof_Birth = ? WHERE Researcher_ID=?;`;
 
-        conn.promise().query(editQuery, [])
+        conn.promise().query(editQuery, [firstname,lastname,sex,dateofbirth,researcherid])
             .then(() => {
                 pool.releaseConnection(conn);
                 res.redirect('/researcher');

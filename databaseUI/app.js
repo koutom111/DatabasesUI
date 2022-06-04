@@ -10,6 +10,7 @@ require('custom-env').env('localhost');
 
 const program = require('./routes/routes/program');
 const project = require('./routes/routes/project');
+const projectCRUD = require('./routes/routes/projectCRUD');
 const home = require('./routes/routes/home');
 const interField = require('./routes/routes/interField');
 const youngResearcher = require('./routes/routes/youngResearcher');
@@ -52,6 +53,7 @@ app.use(session({
 app.use('/interField', interField);
  app.use('/program', program);
  app.use('/project', project);
+app.use('/projectCRUD', projectCRUD);
 app.use('/youngResearcher', youngResearcher);
 app.use('/bestExecutives', bestExecutives);
 app.use('/noStress', noStress);

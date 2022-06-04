@@ -46,14 +46,20 @@
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Edit Program</h4>
+                <h4 class="modal-title">Edit Project</h4>
             </div>
             <div class="modal-body">
                 <form id="modal-form">
                     <div style="text-align: center;">
+                        <input type="text" name="projecttitle" id="projecttitle" readonly></br>
+                        <input type="text" name="summary" id="summary"></br>
+                        <input type="text" name="grant" id="grant"></br>
+                        <input type="text" name="startingdate" id="startingdate"></br>
+                        <input type="text" name="duedate" id="duedate"></br>
                         <input type="text" name="programtitle" id="programtitle" readonly></br>
-                        <input type="text" name="description" id="description"></br>
-                        <input type="text" name="department" id="department"></br>
+                        <input type="text" name="organizationname" id="organizationname" readonly></br>
+                        <input type="text" name="executiveid" id="executiveid" readonly></br>
+                        <input type="text" name="researcherid" id="researcherid" readonly>
                     </div>
                 </form>
             </div>
@@ -73,7 +79,7 @@
 
 
 <div class="container">
-    <div class="col"><a class="btn btn-dark text-center" role="button" style="height: 50px;text-align: center" href="/program/insert">Add Program</a></div>
+    <div class="col"><a class="btn btn-dark text-center" role="button" style="height: 50px;text-align: center" href="/projectCRUD/insert">Add Project</a></div>
     <div class="row" id="row">
         <div class="col-md-12">
             <div class="card" id="card-container">
@@ -82,30 +88,47 @@
                         <table class="table">
                             <thead>
                             <tr>
+                                <th style="text-align:center" >Project Title</th>
+                                <th style="text-align:center" >Summary</th>
+                                <th style="text-align:center" >Grant</th>
+                                <th style="text-align:center" >Starting Date</th>
+                                <th style="text-align:center" >Due Date</th>
                                 <th style="text-align:center" >Program Title</th>
-                                <th style="text-align:center" >Description</th>
-                                <th style="text-align:center" >Department</th>
+                                <th style="text-align:center" >Organization Name</th>
+                                <th style="text-align:center" >Executive ID</th>
+                                <th style="text-align:center" >Researcher ID</th>
                                 <th></th>
                                 <th></th>
                             </tr>
                             </thead>
-                            <% if(programs.length > 0){
+                            <% if(projects.length > 0){
 
-                            programs.forEach((org, i) => { %>
+                            projects.forEach((org, i) => { %>
                                 <tr>
                                     <!--                            <th scope="row"><%= (i+1) %></th>-->
+                                    <td><%= org.Project_Title %></td>
+                                    <td><%= org.Summary %></td>
+                                    <td><%= org.Grant %></td>
+                                    <td><%= org.Starting_Date %></td>
+                                    <td><%= org.Due_Date%></td>
                                     <td><%= org.Program_Title %></td>
-                                    <td><%= org.Description %></td>
-                                    <td><%= org.Department %></td>
+                                    <td><%= org.Organization_Name %></td>
+                                    <td><%= org.Executive_ID %></td>
+                                    <td><%= org.Researcher_ID %></td>
                                     <td>
                                         <a type="button" onclick="setModalFields(this)"
-                                           data-toggle="modal" data-programtitle="<%= org.Program_Title %>"
-                                           data-description="<%= org.Description %>" data-department="<%= org.Department%>"
+                                           data-toggle="modal" data-projecttitle="<%= org.Project_Title %>"
+                                           data-summary="<%= org.Summary %>" data-grant="<%= org.Grant %>"
+                                           data-startingdate="<%= org.Starting_Date %>"
+                                           data-duedate="<%= org.Due_Date %>" data-programtitle="<%= org.Program_Title %>"
+                                           data-organizationname="<%= org.Organization_Name %>"
+                                           data-executiveid="<%= org.Executive_ID %>"
+                                           data-researcherid="<%= org.Researcher_ID %>"
                                            data-target="#editModal">
                                             <i class="fa fa-edit"></i>
                                         </a>
                                     </td>
-                                    <form method="POST" action="/program/delete/<%= org.Program_Title %>">
+                                    <form method="POST" action="/projectCRUD/delete/<%= org.Project_Title %>">
                                         <td>
                                             <button style="all: unset; cursor: pointer;" type="submit"><i class="fa fa-trash"></i></button>
                                         </td>
@@ -115,7 +138,7 @@
 
                             }else{ %>
                                 <tr>
-                                    <td colspan="3">No Program</td>
+                                    <td colspan="3">No Project</td>
                                 </tr>
                             <% } %>
                         </table>
@@ -128,10 +151,16 @@
 
 <script>
     function setModalFields(row) {
+        document.getElementById("projecttitle").value = row.dataset.projecttitle;
+        document.getElementById("summary").value = row.dataset.summary;
+        document.getElementById("grant").value = row.dataset.grant;
+        document.getElementById("startingdate").value = row.dataset.startingdate;
+        document.getElementById("duedate").value = row.dataset.duedate;
         document.getElementById("programtitle").value = row.dataset.programtitle;
-        document.getElementById("description").value = row.dataset.description;
-        document.getElementById("department").value = row.dataset.department;
-        document.getElementById("modal-form").action = "/program/edit/";
+        document.getElementById("organizationname").value = row.dataset.organizationname;
+        document.getElementById("executiveid").value = row.dataset.executiveid;
+        document.getElementById("researcherid").value = row.dataset.researcherid;
+        document.getElementById("modal-form").action = "/projectCRUD/edit/";
         document.getElementById("modal-form").method = "POST";
     }
 </script>

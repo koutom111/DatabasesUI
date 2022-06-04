@@ -57,49 +57,4 @@ exports.getProject = (req, res, next) => {
     })
 }
 
-exports.postProject = (req, res, next) => {
-
-    /* get necessary data sent */
-    const Project_Title = req.body.Project_Title;
-    const Summary = req.body.Summary;
-    const Grant = req.body.Grant;
-
-    /* create the connection, execute query, flash respective message and redirect to project route */
-    pool.getConnection((err, conn) => {
-        var sqlQuery = `INSERT INTO Project(Project_Title, Summary, Grant,Researcher_ID,P) VALUES(?, ?, ?)`;
-
-        conn.promise().query(sqlQuery, [Project_Title, Summary, Grant])
-            .then(() => {
-                pool.releaseConnection(conn);
-                req.flash('messages', { type: 'success', value: "Successfully added a new Project!" });
-                console.log("success!");
-                res.redirect('/');
-            })
-            .catch(err => {
-                req.flash('messages', { type: 'error', value: "Something went wrong, Project could not be added." });
-                console.log("no");
-                res.redirect('/');
-            })
-    })
-}
-
-exports.postDeleteProject = (req, res, next) => {
-    const Project_Title = req.body.Project_Title;
-    /* create the connection, execute query, flash respective message and redirect to organization route */
-    pool.getConnection((err, conn) => {
-        var sqlQuery = `DELETE * FROM Project WHERE Project_Title = ${Program_Title}`;
-
-        conn.promise().query(sqlQuery)
-            .then(() => {
-                pool.releaseConnection(conn);
-                req.flash('messages', { type: 'success', value: "Successfully deleted Project!" })
-                res.redirect('/project');
-            })
-            .catch(err => {
-                req.flash('messages', { type: 'error', value: "Something went wrong, Project could not be deleted." })
-                res.redirect('/project');
-            })
-    })
-
-}
 /* Controller to render data shown in create student page */

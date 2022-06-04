@@ -82,13 +82,14 @@ exports.postEditExecutive = (req, res, _) => {
 
     pool.getConnection((err, conn) => {
 
-        let First_Name = req.body.firstname;
-        let Last_Name = req.body.lastname;
-        let Dateof_Birth = req.body.dateofbirth;
+        let executiveid = req.body.executiveid;
+        let firstname = req.body.firstname;
+        let lastname = req.body.lastname;
+        let dateofbirth = req.body.dateofbirth;
 
         let editQuery = `UPDATE Executive SET First_Name=?, Last_Name=?, Dateof_Birth=? WHERE Executive_ID=?;`;
 
-        conn.promise().query(editQuery, [First_Name,Last_Name,Dateof_Birth])
+        conn.promise().query(editQuery, [firstname,lastname,dateofbirth,executiveid])
             .then(() => {
                 pool.releaseConnection(conn);
                 res.redirect('/executive');
