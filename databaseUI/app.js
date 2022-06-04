@@ -18,6 +18,8 @@ const noStress = require('./routes/routes/noStress');
 const organization = require('./routes/routes/organization');
 const projectResearcher= require('./routes/routes/projectResearcher');
 const projectEvaluation= require('./routes/routes/projectEvaluation');
+const constOrganization= require('./routes/routes/constOrganization');
+const popularField= require('./routes/routes/popularField');
 
 
 
@@ -56,6 +58,9 @@ app.use('/bestExecutives', bestExecutives);
 app.use('/noStress', noStress);
 app.use('/projectResearcher', projectResearcher);
 app.use('/projectEvaluation', projectEvaluation);
+app.use('/constOrganization', constOrganization);
+app.use('/popularField', popularField);
+
 
 // app.use('/editProject', project);
 // app.use ('editProgram', program);
