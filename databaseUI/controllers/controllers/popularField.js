@@ -18,7 +18,7 @@ exports.getPopularField = (req, res, next) => {
         /* execute query to get best dribbler */
         let namePromise = new Promise((resolve, reject) => {
             conn.promise()
-                .query("SELECT  F.Scientific_Field AS SField, P.Project_Title AS Title, CONCAT(R.First_Name , ' ' ,R.Last_Name) AS RName FROM Field F INNER JOIN Project P ON P.Project_Title = F.Project_Title INNER JOIN works_on W ON W.Project_Title = P.Project_Title INNER JOIN Researcher R ON R.Researcher_ID = W.Researcher_ID WHERE P.Starting_Date <= '2021-06-05' AND P.Due_Date >= '2022-06-05' ")
+                .query("SELECT  F.Scientific_Field AS SField, P.Project_Title AS Title, CONCAT(R.First_Name , ' ' ,R.Last_Name) AS RName FROM Field F INNER JOIN Project P ON P.Project_Title = F.Project_Title INNER JOIN works_on W ON W.Project_Title = P.Project_Title INNER JOIN Researcher R ON R.Researcher_ID = W.Researcher_ID WHERE P.Starting_Date <= '2021-06-05' AND P.Due_Date >= '2022-06-05' ORDER BY F.Scientific_Field")
                 .then(([rows, fields]) => {      //??????
                     rows.forEach(element=>{
                         Field.push(element.SField);
