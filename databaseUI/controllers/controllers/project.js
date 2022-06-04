@@ -66,7 +66,7 @@ exports.postProject = (req, res, next) => {
 
     /* create the connection, execute query, flash respective message and redirect to project route */
     pool.getConnection((err, conn) => {
-        var sqlQuery = `INSERT INTO Project(Project_Title, Summary, Grant) VALUES(?, ?, ?)`;
+        var sqlQuery = `INSERT INTO Project(Project_Title, Summary, Grant,Researcher_ID,P) VALUES(?, ?, ?)`;
 
         conn.promise().query(sqlQuery, [Project_Title, Summary, Grant])
             .then(() => {

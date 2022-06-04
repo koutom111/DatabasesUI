@@ -35,10 +35,39 @@
     <script src=
             "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js">
     </script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
 <body>
+
+<div id="editModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit Organization</h4>
+            </div>
+            <div class="modal-body">
+                <form id="modal-form">
+                    <div style="text-align: center;">
+                        <input type="text" name="organization_name" id="organization_name" readonly></br>
+                        <input type="text" name="abbrevation" id="abbrevation"></br>
+                        <input type="text" name="street" id="street"></br>
+                        <input type="text" name="town" id="town"></br>
+                        <input type="text" name="number" id="number"></br>
+                        <input type="text" name="postal_code" id="postal_code">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" form="modal-form" class="btn btn-success">Update</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
 
 <h3><%- include("includes/navbar.ejs")%></h3>
 
@@ -47,6 +76,7 @@
 
 
 <div class="container">
+    <div class="col"><a class="btn btn-dark text-center" role="button" style="height: 50px;text-align: center" href="/organization/insert">Add Organization</a></div>
     <div class="row" id="row">
         <div class="col-md-12">
             <div class="card" id="card-container">
@@ -55,28 +85,44 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th>Organization_Title</th>
-                                <th>Abbrevation</th>
-                                <th>Street</th>
-                                <th>Town</th>
-                                <th>Number</th>
-                                <th>Postal_Code</th>
+                                <th style="text-align:center" >Organization Name</th>
+                                <th style="text-align:center" >Abbrevation</th>
+                                <th style="text-align:center" >Street</th>
+                                <th style="text-align:center" >Town</th>
+                                <th style="text-align:center" >Number</th>
+                                <th style="text-align:center" >Postal_Code</th>
+                                <th></th>
                                 <th></th>
                             </tr>
                             </thead>
-                            <% if(Organization_Title.length){
+                            <% if(organizations.length > 0){
 
-                            for(var i = 0; i< Organization_Title.length; i++) {%>
+                            organizations.forEach((org, i) => { %>
                                 <tr>
                                     <!--                            <th scope="row"><%= (i+1) %></th>-->
-                                    <th><%=Organization_Title[i]%></th>
-                                    <th><%=Abbrevation[i]%></th>
-                                    <th><%=Street[i]%></th>
-                                    <th><%=Town[i]%></th>
-                                    <th><%=Number[i]%></th>
-                                    <th><%=Postal_Code[i]%></th>
+                                    <td><%= org.Organization_Name %></td>
+                                    <td><%= org.Abbrevation %></td>
+                                    <td><%= org.Street %></td>
+                                    <td><%= org.Town %></td>
+                                    <td><%= org['Number'] %></td>
+                                    <td><%= org.Postal_Code %></td>
+                                    <td>
+                                        <a type="button" onclick="setModalFields(this)"
+                                           data-toggle="modal" data-organization_name="<%= org.Organization_Name %>"
+                                           data-abbrevation="<%= org.Abbrevation %>" data-street="<%= org.Street %>"
+                                           data-town="<%= org.Town %>"
+                                           data-number="<%= org['Number'] %>" data-postal_code="<%= org.Postal_Code %>"
+                                           data-target="#editModal">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                    </td>
+                                    <form method="POST" action="/organization/delete/<%= org.Organization_Name %>">
+                                        <td>
+                                            <button style="all: unset; cursor: pointer;" type="submit"><i class="fa fa-trash"></i></button>
+                                        </td>
+                                    </form>
                                 </tr>
-                            <% }
+                            <% })
 
                             }else{ %>
                                 <tr>
@@ -91,6 +137,18 @@
     </div>
 </div>
 
+<script>
+    function setModalFields(row) {
+        document.getElementById("organization_name").value = row.dataset.organization_name;
+        document.getElementById("abbrevation").value = row.dataset.abbrevation;
+        document.getElementById("street").value = row.dataset.street;
+        document.getElementById("town").value = row.dataset.town;
+        document.getElementById("number").value = row.dataset.number;
+        document.getElementById("postal_code").value = row.dataset.postal_code;
+        document.getElementById("modal-form").action = "/organization/edit/";
+        document.getElementById("modal-form").method = "POST";
+    }
+</script>
 
 <script src="../../public/assets/bootstrap/js/bootstrap.min.js"></script>
 

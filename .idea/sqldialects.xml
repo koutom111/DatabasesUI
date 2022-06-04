@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
-    <file url="file://$PROJECT_DIR$/databaseUI/controllers/controllers/editExecutive.js" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/databaseUI/controllers/controllers/editOrganization.js" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/databaseUI/controllers/controllers/editResearcher.js" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/databaseUI/controllers/controllers/constOrganization.js" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/databaseUI/controllers/controllers/executive.js" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/databaseUI/controllers/controllers/organization.js" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/databaseUI/controllers/controllers/popularField.js" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/databaseUI/controllers/controllers/program.js" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/databaseUI/controllers/controllers/project.js" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/databaseUI/controllers/controllers/researcher.js" dialect="GenericSQL" />
   </component>
 </project>

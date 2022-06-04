@@ -1,64 +1,108 @@
-//fix student to project queries etc
-
-
 const { pool } = require('../../utils/database');
 
-/* Controller to render data shown in researchers page */
+/* Controller to render data shown in landing page*/
 exports.getResearcher = (req, res, next) => {
 
-    /* check for messages in order to show them when rendering the page */
-    let messages = req.flash("messages");
-    if (messages.length === 0) messages = [];
-
-    let best_dribbling_grade, best_dribbler, best_shooting_grade, best_shooter;
+    let researchers;
 
     /* create the connection */
     pool.getConnection((err, conn) => {
 
-        /* execute query to get best dribbler */
-        let dribblingPromise = new Promise((resolve, reject) => {
+        let namePromise = new Promise((resolve, reject) => {
             conn.promise()
-            .query("SELECT g.grade, s.name, s.surname FROM students s INNER JOIN grades g ON g.student_id = s.id WHERE g.course_name = 'DRI' ORDER BY g.grade DESC LIMIT 1")
-            .then(([rows, fields]) => {
-                best_dribbling_grade = rows[0].grade;
-                best_dribbler = rows[0].name + " " + rows[0].surname;
-                resolve();
-             })
-            .then(() => pool.releaseConnection(conn))
-            .catch(err => console.log(err))
+                .query("select Researcher_ID,First_Name,Last_Name,Sex,Dateof_Birh from Researcher")
+                .then(([rows, fields]) => {      //??????
+                    researchers = rows;
+                    resolve();
+                })
+                .then(() => pool.releaseConnection(conn))
+                .catch(err => console.log(err))
         })
 
-        /* execute query to get best shooter */
-        let shootingPromise = new Promise((resolve, reject) => { 
-            conn.promise()
-            .query("SELECT g.grade, s.name, s.surname FROM students s INNER JOIN grades g ON g.student_id = s.id WHERE g.course_name = 'SHO' ORDER BY g.grade DESC LIMIT 1")
-            .then(([rows, fields]) => {
-                best_shooting_grade = rows[0].grade;
-                best_shooter = rows[0].name + " " + rows[0].surname;
-                resolve();
-             })
-            .then(() => pool.releaseConnection(conn))
-            .catch(err => console.log(err))
-        })
 
         /* when queries promises finish render respective data */
-        Promise.all([dribblingPromise, shootingPromise]).then(() => {
-            res.render('researcher.ejs', {
-                pageTitle: "Researcher Page",
-                best_dribbling_grade,
-                best_dribbler,
-                best_shooter,
-                best_shooting_grade,
-                messages
+        Promise.all([namePromise]).then(() => {
+            res.render('views/researcher.ejs', {
+                pageTitle: "See All our Researchers! ",
+                researchers
             })
         });
 
     })
 }
 
-/* Controller to render data shown in create student page */
-exports.getCreateProject = (req, res, next) => {
-    res.render('create_project.ejs', {
-        pageTitle: "Project Creation Page"
+
+exports.getInsertPage = (req, res, next) => {
+
+    res.render('views/editResearcher.ejs', {
+        pageTitle: "Insert a new Researcher! "
     })
+
+}
+
+exports.postResearcher = (req, res, next) => {
+
+    /* get necessary data sent */
+    const Researcher_ID = req.body.Researcher_ID;
+    const First_Name = req.body.First_Name;
+    const Last_Name = req.body.Last_Name;
+    const Sex = req.body.Sex;
+    const Dateof_Birth = req.body.Dateof_Birth;
+
+
+    pool.getConnection((err, conn) => {
+        var sqlQuery = `INSERT INTO Researcher(Researcher_ID,First_Name,Last_Name,Sex,Dateof_Birh) VALUES(?,?,?,?,?)`;
+
+        conn.promise().query(sqlQuery, [Researcher_ID,First_Name,Last_Name,Sex,Dateof_Birh])
+            .then(() => {
+                pool.releaseConnection(conn);
+                res.redirect('/researcher');
+            })
+            .catch(err => {
+                res.redirect('/researcher');
+            })
+    })
+}
+
+exports.postDeleteResearcher = (req, res, _) => {
+    const Researcher_ID = req.params.id;
+    /* create the connection, execute query, flash respective message and redirect to organization route */
+    // console.log(Organization_Name)
+    pool.getConnection((err, conn) => {
+
+        conn.promise().query(`DELETE FROM Researcher WHERE Researcher_ID = '${Researcher_ID}'`)
+            .then(() => {
+                pool.releaseConnection(conn);
+                res.redirect('/researcher');
+            })
+            .catch(err => {
+                console.log(err)
+                res.redirect('/researcher');
+            })
+    })
+
+}
+
+exports.postEditResearcher = (req, res, _) => {
+
+    pool.getConnection((err, conn) => {
+
+        let First_Name = req.body.firstname;
+        let Last_Name = req.body.lastname;
+        let Sex = req.body.sex;
+        let Dateof_Birth = req.body.dateofbirth;
+
+        let editQuery = `UPDATE Researcher SET First_Name=?, Last_Name=?, Sex= ?, Dateof_Birth = ? WHERE Researcher_ID=?;`;
+
+        conn.promise().query(editQuery, [])
+            .then(() => {
+                pool.releaseConnection(conn);
+                res.redirect('/researcher');
+            })
+            .catch(err => {
+                console.log(err)
+                res.redirect('/researcher');
+            })
+    })
+
 }

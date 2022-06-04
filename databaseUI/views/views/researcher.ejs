@@ -35,10 +35,38 @@
     <script src=
             "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js">
     </script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
 <body>
+
+<div id="editModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit Researcher</h4>
+            </div>
+            <div class="modal-body">
+                <form id="modal-form">
+                    <div style="text-align: center;">
+                        <input type="text" name="researcherid" id="researcherid" readonly></br>
+                        <input type="text" name="firstname" id="firstname"></br>
+                        <input type="text" name="lastname" id="lastname"></br>
+                        <input type="text" name="sex" id="sex"></br>
+                        <input type="text" name="dateofbirth" id="dateofbirth"></br>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" form="modal-form" class="btn btn-success">Update</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
 
 <h3><%- include("includes/navbar.ejs")%></h3>
 
@@ -47,6 +75,7 @@
 
 
 <div class="container">
+    <div class="col"><a class="btn btn-dark text-center" role="button" style="height: 50px;text-align: center" href="/researcher/insert">Add Researcher</a></div>
     <div class="row" id="row">
         <div class="col-md-12">
             <div class="card" id="card-container">
@@ -55,30 +84,45 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th>Researcher_ID</th>
-                                <th>First_Name</th>
-                                <th>Last_Name</th>
-                                <th>Sex</th>
-                                <th>Dateof_Birth</th>
+                                <th style="text-align:center" >Researcher ID</th>
+                                <th style="text-align:center" >First Name</th>
+                                <th style="text-align:center" >Last Name</th>
+                                <th style="text-align:center" >Sex</th>
+                                <th style="text-align:center" >Date of Birth</th>
+                                <th></th>
                                 <th></th>
                             </tr>
                             </thead>
-                            <% if(Researcher_ID.length){
+                            <% if(researchers.length > 0){
 
-                            for(var i = 0; i< Researcher_ID.length; i++) {%>
+                            researchers.forEach((org, i) => { %>
                                 <tr>
                                     <!--                            <th scope="row"><%= (i+1) %></th>-->
-                                    <th><%=Researcher_ID[i]%></th>
-                                    <th><%=First_Name[i]%></th>
-                                    <th><%=Last_Name[i]%></th>
-                                    <th><%=Sex[i]%></th>
-                                    <th><%=Dateof_Birth[i]%></th>
+                                    <td><%= org.Researcher_ID %></td>
+                                    <td><%= org.First_Name %></td>
+                                    <td><%= org.Last_Name %></td>
+                                    <td><%= org.Sex %></td>
+                                    <td><%= org.Dateof_Birth %></td>
+                                    <td>
+                                        <a type="button" onclick="setModalFields(this)"
+                                           data-toggle="modal" data-researcherid="<%= org.Researcher_ID %>"
+                                           data-abbrevation="<%= org.firstname %>" data-lastname="<%= org.Last_Name %>"
+                                           data-sex="<%= org.Sex %>" data-dateofbirth="<%= org.Dateof_Birth %>"
+                                           data-target="#editModal">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                    </td>
+                                    <form method="POST" action="/researcher/delete/<%= org.Researcher_ID%>">
+                                        <td>
+                                            <button style="all: unset; cursor: pointer;" type="submit"><i class="fa fa-trash"></i></button>
+                                        </td>
+                                    </form>
                                 </tr>
-                            <% }
+                            <% })
 
                             }else{ %>
                                 <tr>
-                                    <td colspan="3">No Researcher</td>
+                                    <td colspan="3">No Researchers</td>
                                 </tr>
                             <% } %>
                         </table>
@@ -89,6 +133,17 @@
     </div>
 </div>
 
+<script>
+    function setModalFields(row) {
+        document.getElementById("researcherid").value = row.dataset.researcherid;
+        document.getElementById("firstname").value = row.dataset.firstname;
+        document.getElementById("lastname").value = row.dataset.lastname;
+        document.getElementById("sex").value = row.dataset.sex;
+        document.getElementById("dateofbirth").value = row.dataset.dateofbirth;
+        document.getElementById("modal-form").action = "/researcher/edit/";
+        document.getElementById("modal-form").method = "POST";
+    }
+</script>
 
 <script src="../../public/assets/bootstrap/js/bootstrap.min.js"></script>
 
