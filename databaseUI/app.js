@@ -8,18 +8,19 @@ require('custom-env').env('localhost');
 
 /* ROUTES and how to import routes */
 
- const program = require('./routes/routes/program');
+const program = require('./routes/routes/program');
 const project = require('./routes/routes/project');
 const home = require('./routes/routes/home');
 const interField = require('./routes/routes/interField');
 const youngResearcher = require('./routes/routes/youngResearcher');
 const bestExecutives = require('./routes/routes/bestExecutives');
 const noStress = require('./routes/routes/noStress');
-const organization = require('./routes/routes/organization');
+const editOrganization = require('./routes/routes/editOrganization');
 const projectResearcher= require('./routes/routes/projectResearcher');
 const projectEvaluation= require('./routes/routes/projectEvaluation');
-
-
+const editExecutive = require('./routes/routes/editExecutive');
+const editResearcher = require('./routes/routes/editResearcher');
+const constOrganization = require('./routes/routes/constOrganization');
 
 
 // const grades = require('./routes/grades');
@@ -56,7 +57,10 @@ app.use('/bestExecutives', bestExecutives);
 app.use('/noStress', noStress);
 app.use('/projectResearcher', projectResearcher);
 app.use('/projectEvaluation', projectEvaluation);
-
+app.use('/editExecutive',editExecutive);
+app.use('/editOrganization',editOrganization);
+app.use('/editResearcher',editResearcher);
+app.use('constOrganization',constOrganization);
 // app.use('/editProject', project);
 // app.use ('editProgram', program);
 // app.use ('/editOrganization', organization);

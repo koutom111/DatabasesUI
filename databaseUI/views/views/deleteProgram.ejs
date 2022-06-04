@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <style>
+        h1 {text-align: center;}
+        h3 {text-align: center;}
+        h2 {text-align: center;}
+        p {text-align: center;}
+        div {text-align: center;}
+        title {text-align: center;}
+        ul {text-align: center;}
+        li  {text-align: center;}
+        a  {text-align: center;}
+        button  {text-align: center;}
+        span  {text-align: center;}
+        th  {text-align: center;}
+    </style>
+
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title> <%= pageTitle %> </title>
+
+    <meta name="viewport" content=
+    "width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href=
+    "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <script src=
+            "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+    </script>
+
+    <script src=
+            "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js">
+    </script>
+
+</head>
+
+<body>
+
+<h3><%- include("includes/navbar.ejs")%></h3>
+
+<h3>
+
+</h3>
+<div class="container">
+    <div class="row" id="row">
+        <div class="col-md-12">
+            <form class="form-horizontal" name="project-form" action="/deleteProgram/deleteProgram" method="POST">
+                <div class="form-group col-sm-3 mb-3">
+                    <label for="Program_Title">Program Title</label>
+                    <label>
+                        <input type="text" class="form-control" name="Program Title" placeholder="Enter Program Title">
+                    </label>
+                </div>
+                <!--                       ------------------------ add more -------------------------------------------->
+                <button type="submit" class="btn btn-primary btn-submit-custom">Delete</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="../../public/assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>

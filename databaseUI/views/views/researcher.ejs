@@ -18,7 +18,6 @@
 
 
     </style>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title> <%= pageTitle %> </title>
@@ -56,30 +55,32 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th>Program Title</th>
-                                <th>Description</th>
-                                <th>Department</th>
+                                <th>Researcher_ID</th>
+                                <th>First_Name</th>
+                                <th>Last_Name</th>
+                                <th>Sex</th>
+                                <th>Dateof_Birth</th>
                                 <th></th>
                             </tr>
                             </thead>
-                            <tbody>
-                            <% if(Program_Title.length){
+                            <% if(Researcher_ID.length){
 
-                            for(var i = 0; i< Program_Title.length; i++) {%>
+                            for(var i = 0; i< Researcher_ID.length; i++) {%>
                                 <tr>
-<!--                                    <th scope="row"><%= (i+1) %></th>-->
-                                    <td><%= Program_Title[i]%></td>
-                                    <td><%= Description[i]%></td>
-                                    <td><%= Department[i]%></td>
+                                    <!--                            <th scope="row"><%= (i+1) %></th>-->
+                                    <th><%=Researcher_ID[i]%></th>
+                                    <th><%=First_Name[i]%></th>
+                                    <th><%=Last_Name[i]%></th>
+                                    <th><%=Sex[i]%></th>
+                                    <th><%=Dateof_Birth[i]%></th>
                                 </tr>
                             <% }
 
                             }else{ %>
                                 <tr>
-                                    <td colspan="3">No Program</td>
+                                    <td colspan="3">No Researcher</td>
                                 </tr>
                             <% } %>
-                            </tbody>
                         </table>
                     </div>
                 </div>
