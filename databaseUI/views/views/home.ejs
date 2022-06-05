@@ -23,6 +23,47 @@
             position: relative;
 
         }
+        .dropdown-menu-center {
+            left: 50% !important;
+            right: auto !important;
+            text-align: center !important;
+            transform: translate(-50%, 0) !important;
+        }
+
+        .dropbtn {
+            background-color: #709abf;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 190px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {background-color: #ddd;}
+
+        .dropdown:hover .dropdown-content {display: block;}
+
+        .dropdown:hover .dropbtn {background-color: #5376ad;}
 
     </style>
     <meta charset="utf-8">
@@ -49,8 +90,6 @@
 
 <br>
 <br>
-<br>
-<br>
 
 <h1> Home Page </h1>
 
@@ -61,8 +100,7 @@
 <!--</div>-->
 
 <h2><%- include("includes/navbar.ejs")%></h2>
-<br>
-<br>
+
 <br>
 <p> Interesting Topics to Explore</p>
 
@@ -83,36 +121,45 @@
 <h3> <a href="/projectEvaluation">  > See projects' evaluations and rewards! </a> </h3>
 
 <br>
-<br>
 
-<h3>Explore Our Database</h3>
-
-</div>
-
-<div class="dropdown">
-<!--    <button type="button"-->
-<!--            class="btn btn-primary"-->
-<!--            id="dropDownButton"-->
-<!--            data-toggle="dropdown"-->
-<!--            aria-expanded="false">-->
-<!--&lt;!&ndash;        Select which field you would like to see&ndash;&gt;-->
-<!--&lt;!&ndash;        <span class="caret"></span>&ndash;&gt;-->
-<!--    </button>-->
-
-
-    <ul class="dropdown-menu"
-    <div style="width:800px; margin:0 auto;">
-        centered content
+<!--<h3>Explore Our Database</h3>-->
+<div class="dropdown dropdown-menu-center">
+    <button class="dropbtn">Explore Our Database</button>
+    <div class="dropdown-content">
+        <a href="/projectCRUD">Projects</a>
+        <a href="/program">Programs</a>
+        <a href="/researcher">Researchers</a>
+        <a href="/organization">Organizations</a>
+        <a href="/executive">Executives</a>
     </div>
-
-       <!-- aria-labelledby="dropDownButton" > -->
-        <li><a   href="/projectCRUD">Projects</a></li>
-        <li><a  href="/program">Programs</a></li>
-        <li><a href="/researcher">Researchers</a></li>
-        <li><a href="/organization">Organizations</a></li>
-        <li><a href="/executive">Executives</a></li>
-    </ul>
 </div>
+</div>
+
+
+<!--<div class="dropdown">-->
+<!--&lt;!&ndash;    <button type="button"&ndash;&gt;-->
+<!--&lt;!&ndash;            class="btn btn-primary"&ndash;&gt;-->
+<!--&lt;!&ndash;            id="dropDownButton"&ndash;&gt;-->
+<!--&lt;!&ndash;            data-toggle="dropdown"&ndash;&gt;-->
+<!--&lt;!&ndash;            aria-expanded="false">&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;        Select which field you would like to see&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;        <span class="caret"></span>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;    </button>&ndash;&gt;-->
+
+
+<!--    <ul class="dropdown-menu"-->
+<!--    <div style="width:800px; margin:0 auto;">-->
+<!--        centered content-->
+<!--    </div>-->
+
+<!--       &lt;!&ndash; aria-labelledby="dropDownButton" > &ndash;&gt;-->
+<!--        <li><a   href="/projectCRUD">Projects</a></li>-->
+<!--        <li><a  href="/program">Programs</a></li>-->
+<!--        <li><a href="/researcher">Researchers</a></li>-->
+<!--        <li><a href="/organization">Organizations</a></li>-->
+<!--        <li><a href="/executive">Executives</a></li>-->
+<!--    </ul>-->
+<!--</div>-->
 
 </body>
 
