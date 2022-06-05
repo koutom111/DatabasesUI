@@ -54,10 +54,32 @@ exports.getProject = (req, res, next) => {
 
 exports.getResearchers = (req, res, next) => {
 
-    const project_id = req.params.id;
+    let researchers;
+    const ProjectTitle = req.params.id;
 
-    // query to get all researchers working on project with project_id = project_id
+    /* create the connection */
+    pool.getConnection((err, conn) => {
+        let resPromise = new Promise((resolve, reject) => {
+            var sqlQuery = `SELECT CONCAT(c.First_Name,' ',c.Last_Name) AS Name FROM Researcher c INNER JOIN Works_On r ON c.Researcher_ID = r.Researcher_ID WHERE r.Project_Title = ?`;
+            conn.promise()
+                .query(sqlQuery,ProjectTitle)
+                .then(([rows, fields]) => {      //??????
+                    researchers = rows;
+                    resolve();
+                })
+                .then(() => pool.releaseConnection(conn))
+                .catch(err => console.log(err))
+        })
 
-    let sqlQuery = `SELECT * FROM workson WHERE project_id = ${project_id}`
 
+        /* when queries promises finish render respective data */
+        Promise.all([resPromise]).then(() => {
+            res.render('views/researchersProj.ejs', {
+                pageTitle: "See All Researchers that Work On That Project! ",
+                researchers
+            })
+        });
+
+    })
 }
+    // query to get all researchers working on project with project_id = project_id

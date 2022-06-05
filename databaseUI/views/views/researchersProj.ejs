@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        h1 {text-align: center;}
+        h3 {text-align: center;}
+        h2 {text-align: center;}
+        p {text-align: center;}
+        div {text-align: center;}
+        title {text-align: center;}
+        ul {text-align: center;}
+        li  {text-align: center;}
+        a  {text-align: center;}
+        button  {text-align: center;}
+        span  {text-align: center;}
+        th  {text-align: center;}
+
+
+    </style>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title> <%= pageTitle %> </title>
+
+    <meta name="viewport" content=
+    "width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href=
+    "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <script src=
+            "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+    </script>
+
+    <script src=
+            "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js">
+    </script>
+
+</head>
+
+<body>
+
+<h3><%- include("includes/navbar.ejs")%></h3>
+
+<h2> <%= pageTitle %> </h2>
+
+
+
+<div class="container">
+    <div class="row" id="row">
+        <div class="col-md-12">
+            <div class="card" id="card-container">
+                <div class="card-body" id="card">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th style="text-align:center">Researchers</th>
+
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <% if(researchers.length > 0){
+
+                            researchers.forEach((prog, i) => { %>
+                                <tr>
+                                    <!--                                    <th scope="row"><%= (i+1) %></th>-->
+                                    <td><%= prog.Name%></td>
+                                </tr>
+                            <% })
+
+                            }else{ %>
+                                <tr>
+                                    <td colspan="3">No Researcher in that Project</td>
+                                </tr>
+                            <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="../../public/assets/bootstrap/js/bootstrap.min.js"></script>
+
+<script src="../../public/assets/js/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+<script>
+
+</script>
+
+
+</body>
+
+</html>
