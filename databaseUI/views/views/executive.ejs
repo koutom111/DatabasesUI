@@ -18,7 +18,6 @@
 
 
     </style>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title> <%= pageTitle %> </title>
@@ -36,10 +35,37 @@
     <script src=
             "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js">
     </script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
 <body>
+
+<div id="editModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit Executive</h4>
+            </div>
+            <div class="modal-body">
+                <form id="modal-form">
+                    <div style="text-align: center;">
+                        <input type="text" name="executiveid" id="executiveid" readonly></br>
+                        <input type="text" name="firstname" id="firstname"></br>
+                        <input type="text" name="lastname" id="lastname"></br>
+                        <input type="text" name="dateofbirth" id="dateofbirth">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" form="modal-form" class="btn btn-success">Update</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
 
 <h3><%- include("includes/navbar.ejs")%></h3>
 
@@ -48,6 +74,7 @@
 
 
 <div class="container">
+    <div class="col"><a class="btn btn-dark text-center" role="button" style="height: 50px;text-align: center" href="/executive/insert">Add Executive</a></div>
     <div class="row" id="row">
         <div class="col-md-12">
             <div class="card" id="card-container">
@@ -56,32 +83,45 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th>Executive ID</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Date of Birth</th>
+                                <th style="text-align:center" >Executive ID</th>
+                                <th style="text-align:center" >First Name</th>
+                                <th style="text-align:center" >Last Name</th>
+                                <th style="text-align:center" >Date of Birth</th>
+                                <th></th>
                                 <th></th>
                             </tr>
                             </thead>
-                            <tbody>
-                            <% if(Executive_ID.length){
+                            <% if(executives.length > 0){
 
-                            for(var i = 0; i< Executive_ID.length; i++) {%>
+                            executives.forEach((org, i) => { %>
                                 <tr>
-                                    <!--                                    <th scope="row"><%= (i+1) %></th>-->
-                                    <td><%= Executive_ID[i]%></td>
-                                    <td><%= First_Name[i]%></td>
-                                    <td><%= Last_Name[i]%></td>
-                                    <td><%= Dateof_Birth[i]%></td>
+                                    <!--                            <th scope="row"><%= (i+1) %></th>-->
+                                    <td><%= org.Executive_ID %></td>
+                                    <td><%= org.First_Name %></td>
+                                    <td><%= org.Last_Name %></td>
+                                    <td><%= org.Dateof_Birth %></td>
+                                    <td>
+                                        <a type="button" onclick="setModalFields(this)"
+                                           data-toggle="modal" data-executiveid="<%= org.Executive_ID %>"
+                                           data-firstname="<%= org.First_Name %>" data-lastname="<%= org.Last_Name %>"
+                                           data-dateofbirth="<%= org.Dateof_Birth %>"
+                                           data-target="#editModal">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                    </td>
+                                    <form method="POST" action="/executive/delete/<%= org.Executive_ID %>">
+                                        <td>
+                                            <button style="all: unset; cursor: pointer;" type="submit"><i class="fa fa-trash"></i></button>
+                                        </td>
+                                    </form>
                                 </tr>
-                            <% }
+                            <% })
 
                             }else{ %>
                                 <tr>
                                     <td colspan="3">No Executive</td>
                                 </tr>
                             <% } %>
-                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -90,6 +130,16 @@
     </div>
 </div>
 
+<script>
+    function setModalFields(row) {
+        document.getElementById("executiveid").value = row.dataset.executiveid;
+        document.getElementById("firstname").value = row.dataset.firstname;
+        document.getElementById("lastname").value = row.dataset.lastname;
+        document.getElementById("dateofbirth").value = row.dataset.dateofbirth;
+        document.getElementById("modal-form").action = "/executive/edit/";
+        document.getElementById("modal-form").method = "POST";
+    }
+</script>
 
 <script src="../../public/assets/bootstrap/js/bootstrap.min.js"></script>
 

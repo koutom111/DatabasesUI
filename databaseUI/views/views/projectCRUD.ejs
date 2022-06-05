@@ -46,16 +46,20 @@
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Edit Researcher</h4>
+                <h4 class="modal-title">Edit Project</h4>
             </div>
             <div class="modal-body">
                 <form id="modal-form">
                     <div style="text-align: center;">
-                        <input type="text" name="researcherid" id="researcherid" readonly></br>
-                        <input type="text" name="firstname" id="firstname"></br>
-                        <input type="text" name="lastname" id="lastname"></br>
-                        <input type="text" name="sex" id="sex"></br>
-                        <input type="text" name="dateofbirth" id="dateofbirth"></br>
+                        <input type="text" name="projecttitle" id="projecttitle" readonly></br>
+                        <input type="text" name="summary" id="summary"></br>
+                        <input type="text" name="grant" id="grant"></br>
+                        <input type="text" name="startingdate" id="startingdate"></br>
+                        <input type="text" name="duedate" id="duedate"></br>
+                        <input type="text" name="programtitle" id="programtitle" readonly></br>
+                        <input type="text" name="organizationname" id="organizationname" readonly></br>
+                        <input type="text" name="executiveid" id="executiveid" readonly></br>
+                        <input type="text" name="researcherid" id="researcherid" readonly>
                     </div>
                 </form>
             </div>
@@ -75,7 +79,7 @@
 
 
 <div class="container">
-    <div class="col"><a class="btn btn-dark text-center" role="button" style="height: 50px;text-align: center" href="/researcher/insert">Add Researcher</a></div>
+    <div class="col"><a class="btn btn-dark text-center" role="button" style="height: 50px;text-align: center" href="/projectCRUD/insert">Add Project</a></div>
     <div class="row" id="row">
         <div class="col-md-12">
             <div class="card" id="card-container">
@@ -84,35 +88,47 @@
                         <table class="table">
                             <thead>
                             <tr>
+                                <th style="text-align:center" >Project Title</th>
+                                <th style="text-align:center" >Summary</th>
+                                <th style="text-align:center" >Grant</th>
+                                <th style="text-align:center" >Starting Date</th>
+                                <th style="text-align:center" >Due Date</th>
+                                <th style="text-align:center" >Program Title</th>
+                                <th style="text-align:center" >Organization Name</th>
+                                <th style="text-align:center" >Executive ID</th>
                                 <th style="text-align:center" >Researcher ID</th>
-                                <th style="text-align:center" >First Name</th>
-                                <th style="text-align:center" >Last Name</th>
-                                <th style="text-align:center" >Sex</th>
-                                <th style="text-align:center" >Date of Birth</th>
                                 <th></th>
                                 <th></th>
                             </tr>
                             </thead>
-                            <% if(researchers.length > 0){
+                            <% if(projects.length > 0){
 
-                            researchers.forEach((org, i) => { %>
+                            projects.forEach((org, i) => { %>
                                 <tr>
                                     <!--                            <th scope="row"><%= (i+1) %></th>-->
+                                    <td><%= org.Project_Title %></td>
+                                    <td><%= org.Summary %></td>
+                                    <td><%= org.Grant %></td>
+                                    <td><%= org.Starting_Date && (org.Starting_Date).toLocaleDateString('en-GB')%></td>
+                                    <td><%= org.Due_Date && (org.Due_Date).toLocaleDateString('en-GB')%></td>
+                                    <td><%= org.Program_Title %></td>
+                                    <td><%= org.Organization_Name %></td>
+                                    <td><%= org.Executive_ID %></td>
                                     <td><%= org.Researcher_ID %></td>
-                                    <td><%= org.First_Name %></td>
-                                    <td><%= org.Last_Name %></td>
-                                    <td><%= org.Sex %></td>
-                                    <td><%= org.Dateof_Birth %></td>
                                     <td>
                                         <a type="button" onclick="setModalFields(this)"
-                                           data-toggle="modal" data-researcherid="<%= org.Researcher_ID %>"
-                                           data-abbrevation="<%= org.firstname %>" data-lastname="<%= org.Last_Name %>"
-                                           data-sex="<%= org.Sex %>" data-dateofbirth="<%= org.Dateof_Birth %>"
+                                           data-toggle="modal" data-projecttitle="<%= org.Project_Title %>"
+                                           data-summary="<%= org.Summary %>" data-grant="<%= org.Grant %>"
+                                           data-startingdate="<%= org.Starting_Date %>"
+                                           data-duedate="<%= org.Due_Date %>" data-programtitle="<%= org.Program_Title %>"
+                                           data-organizationname="<%= org.Organization_Name %>"
+                                           data-executiveid="<%= org.Executive_ID %>"
+                                           data-researcherid="<%= org.Researcher_ID %>"
                                            data-target="#editModal">
                                             <i class="fa fa-edit"></i>
                                         </a>
                                     </td>
-                                    <form method="POST" action="/researcher/delete/<%= org.Researcher_ID%>">
+                                    <form method="POST" action="/projectCRUD/delete/<%= org.Project_Title %>">
                                         <td>
                                             <button style="all: unset; cursor: pointer;" type="submit"><i class="fa fa-trash"></i></button>
                                         </td>
@@ -122,7 +138,7 @@
 
                             }else{ %>
                                 <tr>
-                                    <td colspan="3">No Researchers</td>
+                                    <td colspan="3">No Project</td>
                                 </tr>
                             <% } %>
                         </table>
@@ -135,12 +151,16 @@
 
 <script>
     function setModalFields(row) {
+        document.getElementById("projecttitle").value = row.dataset.projecttitle;
+        document.getElementById("summary").value = row.dataset.summary;
+        document.getElementById("grant").value = row.dataset.grant;
+        document.getElementById("startingdate").value = row.dataset.startingdate;
+        document.getElementById("duedate").value = row.dataset.duedate;
+        document.getElementById("programtitle").value = row.dataset.programtitle;
+        document.getElementById("organizationname").value = row.dataset.organizationname;
+        document.getElementById("executiveid").value = row.dataset.executiveid;
         document.getElementById("researcherid").value = row.dataset.researcherid;
-        document.getElementById("firstname").value = row.dataset.firstname;
-        document.getElementById("lastname").value = row.dataset.lastname;
-        document.getElementById("sex").value = row.dataset.sex;
-        document.getElementById("dateofbirth").value = row.dataset.dateofbirth;
-        document.getElementById("modal-form").action = "/researcher/edit/";
+        document.getElementById("modal-form").action = "/projectCRUD/edit/";
         document.getElementById("modal-form").method = "POST";
     }
 </script>

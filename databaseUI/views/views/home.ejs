@@ -47,17 +47,24 @@
 
 <body>
 
+<br>
+<br>
+<br>
+<br>
+
 <h1> Home Page </h1>
 
 
-<div class="modal-footer">
-    <button type="submit" form="modal-form" class="btn btn-success">Update</button>
-    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-</div>
+<!--<div class="modal-footer">-->
+<!--    <button type="submit" form="modal-form" class="btn btn-success">Update</button>-->
+<!--    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+<!--</div>-->
 
 <h2><%- include("includes/navbar.ejs")%></h2>
-
-<p> Hi there:) See our Work!!</p>
+<br>
+<br>
+<br>
+<p> Interesting Topics to Explore</p>
 
 <h3> <a href="/popularField"> > Discover our Scientific Fields! </a></h3>
 
@@ -65,35 +72,45 @@
 
 <h3> <a href="/interField"> > See the top 3 Field Combinations! </a></h3>
 
-<h3> <a href="/youngResearcher"> > See the top young researchers! </a></h3>
+<h3> <a href="/youngResearcher"> > See the top Young Researchers! </a></h3>
 
 <h3> <a href="/bestExecutives"> > See the top best Executives! </a></h3>
 
-<h3> <a href="/noStress">  > See the hardworking researchers with no Stress! </a></h3>
+<h3> <a href="/noStress">  > See the hardworking Researchers with no stress! </a></h3>
 
-<h3> <a href="/projectResearcher">  > See where  researchers work ! </a></h3>
+<h3> <a href="/projectResearcher">  > See where each Researcher work! </a></h3>
 
 <h3> <a href="/projectEvaluation">  > See projects' evaluations and rewards! </a> </h3>
 
-<h3>Modify Our Database</h3>
+<br>
+<br>
+
+<h3>Explore Our Database</h3>
+
+</div>
 
 <div class="dropdown">
-    <button type="button"
-            class="btn btn-primary"
-            id="dropDownButton"
-            data-toggle="dropdown"
-            aria-expanded="false">
-        Select which field you would like to modify
-        <span class="caret"></span>
-    </button>
+<!--    <button type="button"-->
+<!--            class="btn btn-primary"-->
+<!--            id="dropDownButton"-->
+<!--            data-toggle="dropdown"-->
+<!--            aria-expanded="false">-->
+<!--&lt;!&ndash;        Select which field you would like to see&ndash;&gt;-->
+<!--&lt;!&ndash;        <span class="caret"></span>&ndash;&gt;-->
+<!--    </button>-->
+
 
     <ul class="dropdown-menu"
-        aria-labelledby="dropDownButton" >
-        <li><a   href="/editProjectPage">Projects</a></li>
-        <li><a  href="/editProgramPage">Programs</a></li>
-        <li><a href="/editResearcherPage">Researchers</a></li>
-        <li><a href="/editOrganizationPage">Organizations</a></li>
-        <li><a href="/editExecutivePage">Executives</a></li>
+    <div style="width:800px; margin:0 auto;">
+        centered content
+    </div>
+
+       <!-- aria-labelledby="dropDownButton" > -->
+        <li><a   href="/projectCRUD">Projects</a></li>
+        <li><a  href="/program">Programs</a></li>
+        <li><a href="/researcher">Researchers</a></li>
+        <li><a href="/organization">Organizations</a></li>
+        <li><a href="/executive">Executives</a></li>
     </ul>
 </div>
 

@@ -6,35 +6,6 @@ exports.getHome = (req, res, next) => {
 
 }
 
-exports.getDeleteExecutive = (req, res, next) => {
-    res.render('views/deleteExecutive.ejs', {
-        pageTitle: "Delete Executive Page"
-    })
-}
-
-exports.getDeleteOrganization = (req, res, next) => {
-    res.render('views/deleteOrganization.ejs', {
-        pageTitle: "Delete Organization Page"
-    })
-}
-
-exports.getDeleteResearcher = (req, res, next) => {
-    res.render('views/deleteResearcher.ejs', {
-        pageTitle: "Delete Researcher Page"
-    })
-}
-exports.getDeleteProgram = (req, res, next) => {
-    res.render('views/deleteProgram.ejs', {
-        pageTitle: "Delete Program Page"
-    })
-}
-
-exports.getDeleteProject = (req, res, next) => {
-    res.render('views/deleteProject.ejs', {
-        pageTitle: "Delete Project Page"
-    })
-}
-
 exports.getEditOrganization = (req, res, next) => {
     res.render('views/editOrganization.ejs', {
         pageTitle: "Edit Organization Page"
@@ -59,6 +30,9 @@ exports.getEditResearcher = (req, res, next) => {
     })
 }
 exports.getEditProject = (req, res, next) => {
+
+
+
     res.render('views/editProject.ejs', {
         pageTitle: "Edit Project Page"
     })
