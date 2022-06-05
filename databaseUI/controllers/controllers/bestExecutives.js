@@ -40,7 +40,7 @@ exports.getBestExecutives = (req, res,  next) => {
         /* when queries promises finish render respective data */
         Promise.all([namePromise]).then(() => {
             res.render('views/bestExecutives.ejs', {
-                pageTitle: "See our best best Executives!",
+                pageTitle: "See our best Executives!",
                 Last_Name ,
                 First_Name,
                 Organization_Name,
