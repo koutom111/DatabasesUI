@@ -102,7 +102,7 @@
                                     <td><%= org.First_Name %></td>
                                     <td><%= org.Last_Name %></td>
                                     <td><%= org.Sex %></td>
-                                    <td><%= org.Dateof_Birth %></td>
+                                    <td><%=  org.Dateof_Birth && (org.Dateof_Birth).toLocaleDateString('en-GB')%></td>
                                     <td>
                                         <a type="button" onclick="setModalFields(this)"
                                            data-toggle="modal" data-researcherid="<%= org.Researcher_ID %>"

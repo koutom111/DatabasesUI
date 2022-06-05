@@ -43,16 +43,28 @@
 
 <h3><%- include("includes/navbar.ejs") %></h3>
 
-<h2> <%= pageTitle %> </h2>
+<h2> <%= pageTitle %></h2>
 
 
 <div class="container">
+    <form class="form-horizontal" name="project-form" action="/popularField" method="GET">
+        <select name = "field">
+            <option selected disabled>Choose Scientific Field</option>
+            <% Fields.forEach((f, _) =>{ %>
+                <option value = "<%= f.Scientific_Field %>"><%= f.Scientific_Field %></option>
+            <% }) %>
+        </select>
+
+        <button type="submit" class="btn btn-primary btn-submit-custom">Get Results</button>
+    </form>
+
     <div class="row" id="row">
         <div class="col-md-12">
             <div class="card" id="card-container">
                 <div class="card-body" id="card">
                     <div class="table-responsive">
                         <table class="table">
+
                             <thead>
                             <tr>
                                 <th style="text-align:center"> Scientific Field</th>
@@ -62,21 +74,13 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <% if(Field.length){
-
-                            for(var i = 0; i < Field.length; i++) { %>
+                            <% result.forEach((rs, _) => { %>
                                 <tr>
-                                    <td class="bolds"><%= Field[i] %></td>
-                                    <td><%= ProjectTitle[i] %></td>
-                                    <td><%= ResearcherName[i] %></td>
+                                    <td><%= rs.SField %></td>
+                                    <td><%= rs.Title %></td>
+                                    <td><%= rs.RName %></td>
                                 </tr>
-                            <% }
-
-                            }else{ %>
-                                <tr>
-                                    <td colspan="3">No Scientific Fields Available</td>
-                                </tr>
-                            <% } %>
+                            <% }) %>
                             </tbody>
                         </table>
                     </div>

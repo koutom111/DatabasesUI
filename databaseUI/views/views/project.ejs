@@ -49,7 +49,7 @@
 
         <link rel="stylesheet" href=
         "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
         <script src=
                 "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
         </script>
@@ -66,17 +66,17 @@
 
 <h2> <%= pageTitle %> </h2>
 
-    <p>Choose your project based on:</p>
-<div class="box">
-    <label for="c1"><input type="checkbox" name="criteria" value="all" id="c1">Show all</label>
-    <label for="c2"><input type="checkbox" name="criteria" value="summary" id="c2">Summary</label>
-    <label for="c3"><input type="checkbox" name="criteria" value="date" id="c3">Date</label>
-    <label for="c4"><input type="checkbox" name="criteria" value="duration" id="c4">Duration</label>
-    <label for="c5"><input type="checkbox" name="criteria" value="executive" id="c5">Executive</label>
-</div>
-    <p>
-    <button id="btn">Get Project Information</button>
-</p>
+<!--    <p>Choose your project based on:</p>-->
+<!--<div class="box">-->
+<!--    <label for="c1"><input type="checkbox" name="criteria" value="all" id="c1">Show all</label>-->
+<!--    <label for="c2"><input type="checkbox" name="criteria" value="summary" id="c2">Summary</label>-->
+<!--    <label for="c3"><input type="checkbox" name="criteria" value="date" id="c3">Date</label>-->
+<!--    <label for="c4"><input type="checkbox" name="criteria" value="duration" id="c4">Duration</label>-->
+<!--    <label for="c5"><input type="checkbox" name="criteria" value="executive" id="c5">Executive</label>-->
+<!--</div>-->
+<!--    <p>-->
+<!--    <button id="btn">Get Project Information</button>-->
+<!--</p>-->
 
 <!-- The filterable elements. Note that some have multiple class names (this can be used if they belong to multiple categories) -->
 <p>
@@ -84,40 +84,64 @@
 </p>
 <div class="container">
     <div class="row" id="row">
+        <form class="form-horizontal" name="project-form" action="/project" method="GET">
+            <div class="form-group col-sm-6 mb-6">
+                <label for="Start_Date">Start Date</label>
+                <label>
+                    <input type="date" class="form-control" name="Start_Date" placeholder="Enter Start Date">
+                </label>
+            </div>
+            <div class="form-group col-sm-6 mb-6">
+                <label for="Duration">Duration</label>
+                <label>
+                    <input type="number" class="form-control" name="Duration" placeholder="Enter Duration">
+                </label>
+            </div>
+            <div class="form-group col-sm-6 mb-6">
+                <label for="Executive_ID">Executive</label>
+                <select name = "Executive_ID">
+                    <option selected disabled>Choose Executive</option>
+                    <% Executives.forEach((exec, _) =>{ %>
+                        <option value = "<%= exec.Executive_ID %>"><%= exec.First_Name %> <%= exec.Last_Name %></option>
+                    <% }) %>
+                </select>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary btn-submit-custom">Get Result</button>
+        </form>
         <div class="col-md-12">
             <div class="card" id="card-container">
                 <div class="card-body" id="card">
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
-                            <tr>
-                                <th style="text-align:center">Project Title</th>
-                                <th class="filterDiv summary">Summary</th>
-                                <th class="filterDiv date">Starting Date</th>
-                                <th class="filterDiv duration">Duration (Days)</th>
-                                <th class="filterDiv executive">Executive</th>
-                            </tr>
+                                <tr>
+                                    <th>Project Title</th>
+                                    <th>Summary</th>
+                                    <th>Starting Date</th>
+                                    <th>Duration (Days)</th>
+                                    <th>Executive</th>
+                                    <th>Program Title</th>
+                                    <th>Researchers on Project</th>
+                                </tr>
                             </thead>
-                            <% if(Project_Title.length){
-
-                            for(var i = 0; i< Project_Title.length; i++) {%>
-                            <tr>
-<!--                            <th scope="row"><%= (i+1) %></th>-->
-                            <td><%=Project_Title[i]%></td>
-                            <td class="filterDiv summary"><%= Summary[i]%></td>
-                            <td class="filterDiv date"><%= Date[i]%></td>
-                            <td class="filterDiv duration"><%= Duration[i]%></td>
-                            <td class="filterDiv executive"><%= Executive[i]%></td>
-
-                            </tr>
-                            <% }
-
-                        }else{ %>
-                            <tr>
-                            <td colspan="3">No Project</td>
-                            </tr>
-                            <% } %>
-                        </tbody>
+                            <tbody>
+                            <% result.forEach((rs, _) => { %>
+                                <tr>
+                                    <td><%= rs.Project_Title %></td>
+                                    <td><%= rs.Summary %></td>
+                                    <td><%= (rs.Starting_Date).toLocaleDateString('en-GB') %></td>
+                                    <td><%= rs.Duration %></td>
+                                    <td><%= rs.ExName %></td>
+                                    <td><%= rs.Program_Title %></td>
+                                    <form method="GET" action="/project/<%= rs.Project_Title %>/researchers">
+                                        <td>
+                                            <button style="all: unset; cursor: pointer;" type="submit"><i class="fa fa-info-circle"></i></button>
+                                        </td>
+                                    </form>
+                                </tr>
+                            <% }) %>
+                            </tbody>
                     </table>
                 </div>
             </div>
