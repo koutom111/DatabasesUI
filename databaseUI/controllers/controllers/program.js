@@ -22,6 +22,35 @@ exports.getProgram = (req, res, next) => {
 
         /* when queries promises finish render respective data */
         Promise.all([namePromise]).then(() => {
+            res.render('views/program.ejs', {
+                pageTitle: "See All our Programs! ",
+                programs
+            })
+        });
+
+    })
+}
+exports.getProgramHome = (req, res, next) => {
+
+    let programs;
+
+    /* create the connection */
+    pool.getConnection((err, conn) => {
+
+        let namePromise = new Promise((resolve, reject) => {
+            conn.promise()
+                .query("select Program_Title,Description,Department from Program")
+                .then(([rows, fields]) => {      //??????
+                    programs = rows;
+                    resolve();
+                })
+                .then(() => pool.releaseConnection(conn))
+                .catch(err => console.log(err))
+        })
+
+
+        /* when queries promises finish render respective data */
+        Promise.all([namePromise]).then(() => {
             res.render('views/programHome.ejs', {
                 pageTitle: "See All our Programs! ",
                 programs
@@ -30,7 +59,6 @@ exports.getProgram = (req, res, next) => {
 
     })
 }
-
 
 exports.getInsertPage = (req, res, next) => {
 
