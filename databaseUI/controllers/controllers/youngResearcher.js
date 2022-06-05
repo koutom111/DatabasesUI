@@ -17,7 +17,7 @@ exports.getYoungResearcher = (req, res,  next) => {
         /* execute query to get best dribbler */
         let namePromise = new Promise((resolve, reject) => {
             conn.promise()
-                .query("SELECT R.Researcher_ID, R.Last_Name, R.First_Name, COUNT(W.Project_Title) Project_Cnt FROM Researcher R INNER JOIN Works_On W ON W.Researcher_ID = R.Researcher_ID WHERE R.Age < 40 GROUP BY R.Researcher_ID, R.Last_Name, R.First_Name HAVING COUNT(Project_Title) = (SELECT MAX(Project_Cnt)  FROM (SELECT R.Researcher_ID, R.Last_Name, R.First_Name, COUNT(W.Project_Title) Project_Cnt FROM Researcher R INNER JOIN Works_On W ON W.Researcher_ID = R.Researcher_ID INNER JOIN Project P ON P.Project_Title = W.Project_Title WHERE R.Age < 40 AND P.Due_Date >= '2022-05-28' GROUP BY R.Researcher_ID, R.Last_Name, R.First_Name) A)")
+                .query("SELECT R.Researcher_ID, R.Last_Name, R.First_Name, COUNT(W.Project_Title) Project_Cnt FROM Researcher R INNER JOIN Works_On W ON W.Researcher_ID = R.Researcher_ID WHERE R.Age < 40 GROUP BY R.Researcher_ID, R.Last_Name, R.First_Name HAVING COUNT(Project_Title) = (SELECT MAX(Project_Cnt)  FROM (SELECT R.Researcher_ID, R.Last_Name, R.First_Name, COUNT(W.Project_Title) Project_Cnt FROM Researcher R INNER JOIN Works_On W ON W.Researcher_ID = R.Researcher_ID INNER JOIN Project P ON P.Project_Title = W.Project_Title WHERE R.Age < 40 AND P.Due_Date >= '2022-06-08' GROUP BY R.Researcher_ID, R.Last_Name, R.First_Name) A)")
                 .then(([rows, fields]) => {      //??????
                     rows.forEach(element=>{
                         Last_Name.push(element.Last_Name);

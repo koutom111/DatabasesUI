@@ -22,7 +22,7 @@ exports.getProgram = (req, res, next) => {
 
         /* when queries promises finish render respective data */
         Promise.all([namePromise]).then(() => {
-            res.render('views/program.ejs', {
+            res.render('views/programHome.ejs', {
                 pageTitle: "See All our Programs! ",
                 programs
             })
