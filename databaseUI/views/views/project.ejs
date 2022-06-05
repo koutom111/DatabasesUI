@@ -85,6 +85,7 @@
 <div class="container">
     <div class="row" id="row">
         <form class="form-horizontal" name="project-form" action="/project" method="GET">
+            <div>
             <div class="form-group col-sm-6 mb-6">
                 <label for="Start_Date">Start Date</label>
                 <label>
@@ -106,6 +107,7 @@
                     <% }) %>
                 </select>
             </div>
+            </div>
             <br>
             <button type="submit" class="btn btn-primary btn-submit-custom">Get Result</button>
         </form>
@@ -116,13 +118,13 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Project Title</th>
-                                    <th>Summary</th>
-                                    <th>Starting Date</th>
-                                    <th>Duration (Days)</th>
-                                    <th>Executive</th>
-                                    <th>Program Title</th>
-                                    <th>Researchers on Project</th>
+                                    <th style="text-align:center">Project Title</th>
+                                    <th style="text-align:center">Summary</th>
+                                    <th style="text-align:center">Starting Date</th>
+                                    <th style="text-align:center">Duration (Days)</th>
+                                    <th style="text-align:center">Executive</th>
+                                    <th style="text-align:center">Program Title</th>
+                                    <th style="text-align:center">Researchers on Project</th>
                                 </tr>
                             </thead>
                             <tbody>
