@@ -3,10 +3,6 @@ const { pool } = require('../../utils/database');
 /* Controller to render data shown in landing page */
 exports.getProject = (req, res, next) => {
 
-    /* check for messages in order to show them when rendering the page */
-    let messages = req.flash("messages");
-    if (messages.length === 0) messages = [];
-
     let Project_Title= [];
     let Summary = [];
     let Date = [];
@@ -15,11 +11,16 @@ exports.getProject = (req, res, next) => {
 
     /* create the connection */
     pool.getConnection((err, conn) => {
+        let sqlQuery = "select P.Project_Title AS Project_Title, P.Summary AS Summary, P.Starting_Date AS Starting_Date, P.Duration AS Duration,CONCAT(E.First_Name , ' ' ,E.Last_Name) AS ExName from Project P inner join Executive E on P.Executive_ID=E.Executive_ID WHERE P.Due_Date>curdate()";
+
+        // if (param1) sqlQuery += ` AND P.Starting_Date = ${param1}`
+        // if (param2) sqlQuery += ` AND Duration = ${param2}`
+        // if (param3) sqlQuery += ` AND .... = ${param3}`
 
         /* execute query to get best dribbler */
         let namePromise = new Promise((resolve, reject) => {
             conn.promise()
-                .query("select P.Project_Title AS Project_Title, P.Summary AS Summary, P.Starting_Date AS Starting_Date, P.Duration AS Duration,CONCAT(E.First_Name , ' ' ,E.Last_Name) AS ExName from Project P inner join Executive E on P.Executive_ID=E.Executive_ID WHERE P.Due_Date>curdate()")
+                .query(sqlQuery)
                 .then(([rows, fields]) => {      //??????
                     rows.forEach(element=>{
                         Project_Title.push(element.Project_Title);

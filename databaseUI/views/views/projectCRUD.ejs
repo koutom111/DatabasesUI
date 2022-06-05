@@ -109,8 +109,8 @@
                                     <td><%= org.Project_Title %></td>
                                     <td><%= org.Summary %></td>
                                     <td><%= org.Grant %></td>
-                                    <td><%= org.Starting_Date %></td>
-                                    <td><%= org.Due_Date%></td>
+                                    <td><%= org.Starting_Date && (org.Starting_Date).toLocaleDateString('en-GB')%></td>
+                                    <td><%= org.Due_Date && (org.Due_Date).toLocaleDateString('en-GB')%></td>
                                     <td><%= org.Program_Title %></td>
                                     <td><%= org.Organization_Name %></td>
                                     <td><%= org.Executive_ID %></td>

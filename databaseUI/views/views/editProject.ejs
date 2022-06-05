@@ -16,6 +16,9 @@
             button  {text-align: center;}
             span  {text-align: center;}
             th  {text-align: center;}
+            select {
+
+            }
         </style>
 
 
@@ -49,7 +52,7 @@
         <div class="container">
             <div class="row" id="row">
                 <div class="col-md-12">
-                    <form class="form-horizontal" name="project-form" action="/project/editProject" method="POST">
+                    <form class="form-horizontal" name="project-form" action="/projectCRUD/insert" method="POST">
                         <div class="form-group col-sm-3 mb-3">
                             <label for="Project_Title">Project Title</label>
                             <label>
@@ -65,11 +68,53 @@
                         <div class="form-group col-sm-3 mb-3">
                             <label for="Grant"> Grant</label>
                             <label>
-                                <input type="text" class="form-control" name="Grant" placeholder="Enter Grant">
+                                <input type="number" class="form-control" name="Grant" placeholder="Enter Grant">
+                            </label>
+                        </div>
+                        <div class="form-group col-sm-3 mb-3">
+                            <label for="Starting_Date"> Starting Date</label>
+                            <label>
+                                <input type="date" class="form-control" name="Starting_Date" placeholder="Enter Starting Date">
+                            </label>
+                        </div>
+                        <div class="form-group col-sm-3 mb-3">
+                            <label for="Due_Date"> Due Date</label>
+                            <label>
+                                <input type="date" class="form-control" name="Due_Date" placeholder="Enter Due Date">
                             </label>
                         </div>
 
 <!--                       ------------------------ add more -------------------------------------------->
+
+                        <select name = "program_title">
+                            <option selected disabled>Choose Program Title</option>
+                            <% Programs_Titles.forEach((pt, _) =>{ %>
+                            <option value = "<%= pt.Program_Title %>"><%= pt.Program_Title %></option>
+                            <% }) %>
+                        </select>
+
+                        <select name = "organization_name">
+                            <option selected disabled>Choose Organization Name</option>
+                            <% Organizations_Names.forEach((on, _) =>{ %>
+                                <option value = "<%= on.Organization_Name %>"><%= on.Organization_Name %></option>
+                            <% }) %>
+                        </select>
+
+                        <select name = "executive_id">
+                            <option selected disabled>Choose Executive</option>
+                            <% Executives_IDs.forEach((ex, _) =>{ %>
+                                <option value = "<%= ex.Executive_ID %>"><%= ex.First_Name %> <%= ex.Last_Name %></option>
+                            <% }) %>
+                        </select>
+
+                        <select name = "researcher_id">
+                            <option selected disabled>Choose Researcher</option>
+
+                            <% Researchers_IDs.forEach((rs, _) =>{ %>
+                                <option value = "<%= rs.Researcher_ID %>"><%= rs.First_Name %> <%= rs.Last_Name %></option>
+                            <% }) %>
+                        </select>
+
 
                         <button type="submit" class="btn btn-primary btn-submit-custom">Submit</button>
                     </form>

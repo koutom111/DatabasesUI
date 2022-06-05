@@ -33,8 +33,65 @@ exports.getProjectCRUD = (req, res, next) => {
 
 exports.getInsertPage = (req, res, next) => {
 
-    res.render('views/editProject.ejs', {
-        pageTitle: "Insert a new Project! "
+    let Programs_Titles, Organizations_Names, Executives_IDs, Researchers_IDs
+
+    pool.getConnection((err, conn) => {
+        let programTitlesPromise = new Promise((resolve, reject) => {
+            conn.promise()
+                .query("SELECT Program_Title FROM Program")
+                .then(([rows, fields]) => {
+                    Programs_Titles = rows;
+                    resolve();
+                })
+                .then(() => pool.releaseConnection(conn))
+                .catch(err => console.log(err))
+        })
+
+        let OrganizationNamePromise = new Promise((resolve, reject) => {
+            conn.promise()
+                .query("SELECT Organization_Name FROM Organization")
+                .then(([rows, fields]) => {
+                    Organizations_Names = rows;
+                    resolve();
+                })
+                .then(() => pool.releaseConnection(conn))
+                .catch(err => console.log(err))
+        })
+
+        let ExecutiveIDPromise = new Promise((resolve, reject) => {
+            conn.promise()
+                .query("SELECT Executive_ID, First_Name, Last_Name FROM Executive")
+                .then(([rows, fields]) => {
+                    Executives_IDs = rows;
+                    resolve();
+                })
+                .then(() => pool.releaseConnection(conn))
+                .catch(err => console.log(err))
+        })
+
+        let ResearcherIDPromise = new Promise((resolve, reject) => {
+            conn.promise()
+                .query("SELECT Researcher_ID, First_Name, Last_Name FROM Researcher")
+                .then(([rows, fields]) => {
+                    Researchers_IDs = rows;
+                    resolve();
+                })
+                .then(() => pool.releaseConnection(conn))
+                .catch(err => console.log(err))
+        })
+
+
+        Promise.all([programTitlesPromise, ResearcherIDPromise, ExecutiveIDPromise, OrganizationNamePromise]).then(() => {
+            res.render('views/editProject.ejs', {
+                pageTitle: "Insert a new Project! ",
+                Programs_Titles,
+                Organizations_Names,
+                Executives_IDs,
+                Researchers_IDs
+            })
+        });
+
+
     })
 
 }
@@ -42,24 +99,26 @@ exports.getInsertPage = (req, res, next) => {
 exports.postProject = (req, res, next) => {
 
     /* get necessary data sent */
-    const Project_Title = req.body.Project_Title;
+    const Project_Title = req.body.name;
     const Summary = req.body.Summary;
     const Grant = req.body.Grant;
     const Starting_Date = req.body.Starting_Date;
     const Due_Date = req.body.Due_Date;
-
-
-
+    const Program_Title = req.body.program_title;
+    const Organization_Name = req.body.organization_name;
+    const Executive_ID = req.body.executive_id;
+    const Researcher_ID = req.body.researcher_id;
 
     pool.getConnection((err, conn) => {
-        var sqlQuery = `INSERT INTO Project(Project_Title, Summary, ['Grant'], Starting_Date, Due_Date) VALUES(?,?,?,?,?)`;
+        let sqlQuery = "INSERT INTO Project (Project_Title, Summary, `Grant`, Starting_Date, Due_Date, Program_Title, Organization_Name, Executive_ID, Researcher_ID) VALUES(?,?,?,?,?,?,?,?,?)";
 
-        conn.promise().query(sqlQuery, [Project_Title, Summary, ['Grant'], Starting_Date, Due_Date])
+        conn.promise().query(sqlQuery, [Project_Title, Summary, Grant, Starting_Date, Due_Date, Program_Title, Organization_Name, Executive_ID, Researcher_ID])
             .then(() => {
                 pool.releaseConnection(conn);
                 res.redirect('/projectCRUD');
             })
             .catch(err => {
+                console.log(err)
                 res.redirect('/projectCRUD');
             })
     })
