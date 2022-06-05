@@ -50,8 +50,7 @@ exports.getProject = (req, res, next) => {
                 Summary,
                 Date,
                 Duration,
-                Executive,
-                messages
+                Executive
             })
         });
 
